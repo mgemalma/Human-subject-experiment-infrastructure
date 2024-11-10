@@ -1,0 +1,208 @@
+<template name = "instr_2">
+<style>
+  .introjs-tooltip.introjs-floating {
+      background-color: #FFFFFF;
+      min-width: 450px;
+      max-width: 450px;
+  }
+
+  .introjs-tooltip.introjs-bottom-left-aligned {
+      background-color: #FFFFFF;
+      min-width: 450px;
+      max-width: 450px;
+  }
+
+  .introjs-tooltip.introjs-top-middle-aligned
+  {
+      background-color: #FFFFFF;
+      min-width: 450px;
+      max-width: 450px;
+  }
+
+  .introjs-tooltip.introjs-top-left-aligned
+  {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+  }
+
+  .introjs-tooltip.introjs-left
+  {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+  }
+
+  .introjs-tooltip.introjs-right
+  {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+  }
+
+  body
+  {
+    background-color: white;
+  }
+
+  .Button {
+    background-color: indigo;
+    border-color: indigo;
+    color: white;
+    padding: 1.05% 1.5%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button {
+  border: outset;
+  color: white;
+  padding: 1.2% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 150px;
+}
+
+  #Instructions_Division
+  {
+    border: 2px solid black;
+    background-color: white;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    /* height: 95%; */
+    width: 70%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+    font-size: 18px;
+    /* overflow: scroll; */
+    line-height: 1.08;
+
+  }
+  #center_profile
+  {
+    /* border: 2px solid black; */
+    background-color: white;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  #Avatar_Box
+  {
+    border: 2px solid black;
+    background-color: white;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    width: 30%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .introjs-skipbutton
+  {
+    visibility: hidden;
+  }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+  <div id="Instructions_Division">
+    <p style="font-size: 30px;"><b>Apply for loans in the future world!</b></p>
+    <p>Hello <i>{{getNickname}}</i>! Welcome to the future world!</p>
+    <p>Now, imagine you are a small business owner in this future world. To support your own business, you often need to apply for loans from the local bank. <mark><b>Importantly, your local bank leverages an artificial intelligence (AI) powered system to automatically determine whether to approve a loan or not!</b></mark></p>
+    <p>Whenever applying for a loan, you need to submit an applicant profile. You have been assigned with an applicant profile as shown below. Press the button below to go through the profile and see what each feature of your profile means.</p>
+    <div id="center_profile">
+      <input id="shw_inst" style="font-size: 18px;" class = "Button" type = "submit" value = "Show me the explanations">
+      <p></p>
+      <div id="Avatar_Box">
+        <img id="top_profile" src="{{getSrc}}" alt="Admin" style="width : 40%; border-radius: 50%;" >
+        <!-- <p style="overflow: scroll; width: 100%; height: auto;"><b>Name: </b>{{getNickname}}</p> -->
+        <p id="nickname" style="margin-bottom : 0px;"><b>Name: </b>{{getNickname}}</p>
+
+      <p id="race"><b style="display:inline-block;margin-right:10px; width:50px;">Group:</b><b id="race_col" style="display:inline-block; width:50px; font-weight: normal;">&nbsp;{{getRace 2}}</b></p>
+      <p id="credibility"><b>Credit score range: </b>{{getCredibility}}</p>
+      <p id="years"><b>Credit history (years): </b>{{getYears}}</p>
+      <p id="rent"><b>Home ownership: </b>{{getOwnership 2}}</p>
+      <p id="career"><b>Small business industry: </b>{{getCareer}}</p>
+      </div>
+      <br><br>
+      <input id="next_page" style="visibility: hidden; border-color: #4169E1; background-color: #4169E1; padding: 1.1% 1.5%; font-size: 18px;" class = "button" type = "submit" value = "Next">
+    </div>
+  </div>
+
+<script>
+  var button = document.getElementById("shw_inst");
+  button.onclick = function() {
+    var intro = introJs();
+
+
+    intro.setOptions({
+      steps: [
+      {
+        element: document.querySelector('#nickname'),
+        intro: "<p style='text-align:left'>This is the applicant's name (i.e., your name).</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#race'),
+        intro: "<p style='text-align:left'>Each person in this future world belongs to one of the two groups: the <text style=\"color: " + color_first_race + ";\">" + (FIRST_RACE).toLowerCase() + "</text> group or the <text style=\"color: " + color_second_race + ";\">" + (SECOND_RACE).toLowerCase() + "</text> group. You belong to the <text style=\"{{getStyle}}\">{{getRace 1}}</text> group.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#credibility'),
+        intro: "<p style='text-align:left'>Each person has a credit score, which is a number between 300 and 850, and it may vary over time. <mark><b>A score of {{getThreshold}} or above is generally considered as good</b></mark>, and the higher an applicant's credit score is, the more he/she can hope to get a loan.</p> <p style='text-align:left'>For now, your credit score falls into the range between {{getCredibility1 1}} and {{getCredibility1 2}}. You will get the opportunities to improve your credit score later in the game. Note that each time that you apply for a loan, the bank will check for your most updated credit score before making a loan decision for you.</p>"
+      },
+      {
+        element: document.querySelector('#years'),
+        intro: "<p style='text-align:left'>This represents the number of years that you have a credit history. Here in this game, you have a credit history for {{getYears}} years already.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#rent'),
+        intro: "<p style='text-align:left'>This represents your ownership of your home. Here in this game, you {{getOwnership 1}} your home.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#career'),
+        intro: "<p style='text-align:left'>This is the type of industry your small business belongs to. Common industries include software and IT services, advertising and marketing, food and accommodation service, healthcare service, construction, etc.</p>"
+      }
+    ]
+  });
+
+  intro.oncomplete(function(){
+    document.getElementById("next_page").style.visibility = "visible";
+  });
+
+  try {
+    intro.setOptions({
+      exitOnOverlayClick: false,
+      exitOnEsc: false
+    }).start();
+
+  }
+  catch(err) {
+    error_handle();
+  }
+  }
+
+</script>
+
+</template>

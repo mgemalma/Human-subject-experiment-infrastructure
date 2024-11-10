@@ -1,0 +1,147 @@
+<template name = "home" >
+<style>
+
+
+
+.button {
+  border: outset;
+  color: white;
+  padding: 1.2% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+#back {
+  position: fixed; /* instead of absolute */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('money.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+
+
+#Welcome_Page
+{
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  font-size: 18px;
+  padding: 15px;
+  text-align: left;
+  z-index: 1;
+}
+
+#center_sec
+{
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.regular_text
+{
+  font-size: 18px;
+  text-align: left;
+}
+
+.warning_text
+{
+  font-size: 18px;
+  text-align: left;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+ul {
+  margin-bottom: 20px;
+}
+</style>
+
+
+{{#if currentUser}}
+
+<div id="back">
+  </div>
+  <div id = "Welcome_Page" >
+
+      <p class="regular_text">
+        <b style="font-size: 30px;">Welcome!</b>
+      </p>
+      <p class = "regular_text">
+        Artificial intelligence (AI) technologies have been quickly developing over the past decade. Perhaps in the future, AI will be increasingly used to make a wide range of decisions on behalf of people. What that future would be like?
+      </p>
+      <p class = "regular_text">
+        In this HIT, we invite you to play a game to travel into the future, and to experience a world where banks utilize AI technologies to automate their business decision making. You will find more instructions on how to play this game in the next few pages. <br>
+
+        Sound interesting? Scroll down and click the button below to travel into the future!
+
+        <h2>Key Notes for Our Participants:</h2>
+<div style="background-color: #E8E8E8; padding: 20px; border: 2px solid #D1D1D1; border-radius: 10px; width: 80%; margin: 0 auto;">
+    <ul style="list-style-type: disc; line-height: 2;">
+        <li>ENTER PARTICIPANT INSTRUCTIONS HERE!</li>
+
+    </ul>
+</div>
+
+
+
+
+      </p>
+
+      <div id="center_sec">
+      <input id = "Accept" style="background-color: #4169E1; border-color: #4169E1;" class = "button" type="button" value= {{getText}}>
+      </div>
+
+  </div>
+
+
+   <script>
+   var button= document.getElementById('Accept');
+   button.onclick = function()
+   {
+     window.history.pushState("", "", path_new + "/instructions");
+     window.location.href = path_new + "/instructions";
+   }
+   </script>
+
+{{/if}}
+
+
+</template>

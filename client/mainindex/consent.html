@@ -1,0 +1,169 @@
+<template name="selector" >
+
+  {{#if whichPage}}
+    {{>consent}}
+  {{else}}
+
+  {{/if}}
+  <style>
+    .Text
+    {
+        font-size: 10pt;
+    }
+
+    </style>
+    <p class = "Text"></p>
+    <p class = "Text">Page Loading...</p>
+    <p class = "Text">If this is taking too long, please refresh the page.</p>
+
+  </template>
+<template name="consent">
+  {{#if currentUser}}
+  <style>
+    Body
+    {
+      background-color: #FFFFFF;
+
+    }
+    #Accept {
+      background-color: #4CAF50;
+      border: outset;
+      color: white;
+      padding: 15px 50px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      /*margin: 4px 2px;*/
+      cursor: pointer;
+    }
+
+    #Instructions_Plate
+    {
+      border: 3px solid black;
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      width: 70%;
+      transform: translate(-50%, 0%);
+      font-size: 18px;
+      padding: 10px;
+      text-align: left;
+
+    }
+
+    #center_sec
+    {
+      background-color: white;
+      position: relative;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+    *
+    {
+      font-family: "Times New Roman";
+      font-size: 23px;
+    }
+
+    .tab4 {
+            tab-size: 8;
+        }
+
+    </style>
+<div id = "Instructions_Plate">
+  <h2 style="text-align:center; margin-bottom: 0px;">RESEARCH PARTICIPANT CONSENT FORM</h2>
+  <p style="text-align:center; margin-top: 0px; margin-bottom: 0px;"><b>INSERT YOUR CONSENT FORM HERE BELOW IS A TEMPLATE</b></p>
+<h4><u>Future Use (EXAMPLE)</u></h4>
+<p>May we collect your data in this study regarding improvement decisions, usage and perceptions of an AI powered system to study people’s improvement decisions, usage and perceptions of an AI powered system?</p>
+<input type="radio" id="yes" name="first" value="Yes">
+<label for="yes">Yes</label><br>
+<input type="radio" id="no" name="first" value="No">
+<label for="no">No</label><br>
+<p>May we share your data in this study regarding improvement decisions, usage and perceptions of an AI powered system with other researchers to study people’s improvement decisions, usage and perceptions of an AI powered system?</p>
+<input type="radio" id="yes" name="second" value="Yes">
+<label for="yes">Yes</label><br>
+<input type="radio" id="no" name="second" value="No">
+<label for="no">No</label><br>
+<p>May we share your data in this study regarding improvement decisions, usage and perceptions of an AI powered system without your name or identifying information attached with other researchers for future research projects related to other topics?</p>
+<input type="radio" id="yes" name="third" value="Yes">
+<label for="yes">Yes</label><br>
+<input type="radio" id="no" name="third" value="No">
+<label for="no">No</label><br>
+
+<h4><u>Documentation of Informed Consent</u></h4>
+<p>I have had the opportunity to read this consent form and have the research study explained.  I have had the opportunity to ask questions about the research study, and my questions have been answered.  I am prepared to participate in the research study described above.  I will be offered a copy of this consent form after I sign it.</p>
+  <div id="center_sec">
+    <input id = "Accept" style="font-family: Arial; font-size: 20px; background-color: #4CAF50; border-color: #4CAF50;" class = "button" type="button" value= "I agree">
+  </div>
+</div>
+
+ <script>
+ var button= document.getElementById('Accept');
+ button.onclick = function()
+ {
+     var first_ans = displayRadioValue("first");
+     var second_ans = displayRadioValue("second");
+     var third_ans = displayRadioValue("third");
+     var answers = [first_ans, second_ans, third_ans];
+     for(i = 0; i < answers.length; i++)
+     {
+       if (answers[i] == undefined)
+       {
+         swal({
+               title: 'Warning!',
+               text: "Please answer all of the questions!",
+               type: 'warning',
+               allowOutsideClick: false,
+               confirmButtonColor: '#3085d6',
+               confirmButtonText: 'OK'
+               }).then(function(isConfirm) {
+                 if (isConfirm.value===true) {
+                   console.log("isConfirm");
+                 }
+               });
+         return;
+       }
+
+       if (answers[i] != "Yes")
+       {
+         swal({
+               title: 'Warning!',
+               text: "Please say yes to all of the questions. If not comfortable to do so, please return the HIT.",
+               type: 'warning',
+               allowOutsideClick: false,
+               confirmButtonColor: '#3085d6',
+               confirmButtonText: 'OK'
+               }).then(function(isConfirm) {
+                 if (isConfirm.value===true) {
+                   console.log("isConfirm");
+                 }
+               });
+         return;
+       }
+     }
+   document.getElementById('Accept').disabled = true;
+   if (butonRef('Accept'))
+  {
+      return;
+  }
+   UserAdv.update(Meteor.userId(), { $set: { consent : "true" }});
+   CurrentIndex = 1;//++index.currentIndex;
+   if (comparatorForIndices(CurrentIndex, true) == true)
+  {
+   UserAdv.update(Meteor.userId(), { $set: { currentIndex : CurrentIndex }}, function( error, result) {
+     if ( error ) {error_handle();} //info about what went wrong
+     if ( result ) {location.reload();} //the _id of new object if successful
+   });
+  }
+   // location.reload();
+
+ }
+ </script>
+
+{{/if}}
+  </template>

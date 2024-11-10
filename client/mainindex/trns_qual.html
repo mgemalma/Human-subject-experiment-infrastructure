@@ -1,0 +1,102 @@
+<template name = "trns_qual">
+<style>
+  body
+  {
+    background-color: white;
+  }
+
+  #Instructions_Division
+  {
+    border: 2px solid black;
+    background-color: white;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    /* height: 95%; */
+    width: 70%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 25px;
+    text-align: left;
+    font-size: 18px;
+    /* overflow: scroll; */
+    line-height: 1.08;
+
+  }
+
+  #center_sec
+  {
+    /* border: 2px solid black; */
+    background-color: white;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .Button {
+    background-color: red;
+    border-color: red;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button {
+  border: outset;
+  color: white;
+  padding: 1.2% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+
+<div id="Instructions_Division">
+  <p style="font-size: 30px;"><b>Congrats!</b></p>
+  <p>You have passed the qualification test! You can now start playing the real game!</p>
+  <p>Click on the "Next" button below to proceed to the real game!</p>
+  <div id="center_sec">
+    <input id="next_page" style="border-color: #4169E1; background-color: #4169E1; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Next">
+  </div>
+  </div>
+
+  <script>
+    var button_next = document.getElementById("next_page");
+    button_next.onclick = function()
+    {
+      var user = UserAdv.findOne({"_id" : Meteor.userId()});
+      if (user == null)
+      {
+        error_handle();
+      }
+      document.getElementById("next_page").disabled = true;
+      if (butonRef('next_page'))
+      {
+          return;
+      }      
+      CurrentIndex = 6;//++user.currentIndex;
+      if (comparatorForIndices(CurrentIndex, true) == true)
+      {
+      UserAdv.update(Meteor.userId(), { $set: { currentIndex : CurrentIndex  }}, function( error, result) {
+        if ( error ) {error_handle();} //info about what went wrong
+        if ( result ) {location.reload();} //the _id of new object if successful
+      });
+    }
+      // location.reload();
+    }
+    </script>
+
+</template>

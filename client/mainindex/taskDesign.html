@@ -1,0 +1,1033 @@
+<template name = "manager">
+  <style>
+    .Text
+    {
+        font-size: 10pt;
+    }
+
+    </style>
+    <p class = "Text"></p>
+    <p class = "Text">Page Loading...</p>
+    <p class = "Text">If this is taking too long, please refresh the page.</p>
+<body>
+  {{#if showEnd}}
+  {{/if}}
+  </body>
+</template>
+
+<template name = "end">
+
+  {{#if currentUser}}
+  <style>
+
+    body
+    {
+      background-color: #FFFFFF;
+    }
+
+    .Text
+    {
+        font-size: 40pt;
+    }
+
+    .information
+    {
+        font-size: 20pt;
+    }
+
+    .Button {
+      background-color: #555555;
+      border: outset;
+      color: white;
+      padding: 15px 50px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    #center_part
+    {
+      background-color: white;
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      /* height: 95%; */
+      width: 70%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 18px;
+      /* overflow: scroll; */
+      line-height: 1.08;
+
+      border: 3px solid black;
+      position: absolute;
+      top: 0px;
+      left: 50%;
+      width: 70%;
+      transform: translate(-50%, 0%);
+      font-size: 18px;
+      padding: 10px;
+
+
+    }
+
+
+
+.Button_Round {
+  background-color: FireBrick;
+  border-radius: 12px;
+  color: white;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            font-style: italic;
+            margin-top: 30px;
+        }
+
+        .swal2-confirm {
+    font-size: 1.5em;  /* Adjust size as required */
+}
+
+body .swal2-confirm {
+        font-size: 1.5em !important; /* Using !important for additional specificity */
+    }
+    body .swal2-popup {
+        width: 700px !important;
+    }
+
+
+    .centered {
+        text-align: center;
+    }
+    .highlight-box {
+        background-color: #EFEFEF;
+        padding: 15px;
+        border-radius: 10px;
+        margin: 15px 0;
+    }
+    .important-info {
+        color: #003366;
+        font-weight: bold;
+        margin: 20px 0;
+    }
+    .footer, .header {
+        font-weight: bold;
+    }
+
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <div id="center_part">
+
+    <div id="main content" class="highlight-box">
+      ENTER POST CONSENT FORM TEXT HERE!
+    </div>
+
+    <div id="captcha_field" class="highlight-box" style="background: none;">
+      <p class="centered information"><b>Please enter the CAPTCHA code to access the 'May we use the data we collected from you?' prompt and the 'I agree' (submit HIT) button.</b></p>
+      <img id="captcha" src="" class="centered" style="width : 50%;" >
+      <div class="centered">
+          <input maxlength="20" type="text" id="captcha_text" placeholder="Enter the code here!">
+          <button aria-label="Refresh CAPTCHA" title="Refresh CAPTCHA" onclick="window.location.reload();" style="margin-left: 10px;">
+            <span class="glyphicon glyphicon-refresh"></span>
+        </button>
+          <input id="submit_captcha" class="Button_Round" type="submit" value="Submit">
+      </div>
+      <p id="submit_false" style="display: none; background: none; margin: 0; padding: 0;"><b>Wrong code entered! Please try again.</b></p>
+  </div>
+
+  <div id="submit_field" style="display: none;">
+      <div style="background-color: #FFDAB9; padding: 15px; border-radius: 10px;">
+          <p><b>May we use the data we collected from you?</b></p>
+          <label>
+              <input type="radio" name="dataPermission" value="yes">
+              <strong>Yes, I give my permission for the researchers to use my data.</strong>
+          </label>
+          <label>
+              <input type="radio" name="dataPermission" value="no">
+              <strong>No, I do not give permission for the researchers to use my data. Please discard the data you initially obtained from me.</strong>
+          </label>
+          <br>
+          <div id="responseMessage" style="margin-top: 15px; font-size: 20px; font-weight: bold; color: #003366;"></div>
+      </div>
+      <p class="centered information">Please click on the "I agree" Button to sign the form and complete the HIT!</p>
+      <div class="centered">
+          <input id="Submit" class="Button" type="submit" value="I agree">
+      </div>
+  </div>
+
+</div>
+  <script>
+    Meteor.call('test', function (error, result) {
+    if (error)
+    {
+      console.log(error);}
+    else {}
+    }
+  );
+
+
+  document.querySelectorAll('input[name="dataPermission"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+          var messageDiv = document.getElementById('responseMessage');
+          if (this.value === 'yes') {
+              messageDiv.textContent = 'Thank you so much! We appreciate your data! :)';
+              messageDiv.style.backgroundColor = "#AEDFF7";  // Light pastel blue
+          } else if (this.value === 'no') {
+              messageDiv.textContent = 'We respect your decision and we will discard your data, thank you for your time.';
+              messageDiv.style.backgroundColor = "#AEDFF7";  // Light pastel blue
+          }
+      });
+  });
+
+const captcha = Captcha.findOne({"_id" : Meteor.userId()});
+
+    var cpt = document.getElementById("captcha");
+    var cpt1 = document.getElementById("captcha_field");
+    if (cpt != undefined)
+    {
+      if (captcha != undefined)
+    {
+      cpt.src = captcha.test
+    }
+    }
+
+    if (cpt1 != undefined)
+    {
+      if (captcha != undefined)
+    {
+      if (captcha.didSucceed)
+      {
+        cpt1.style.display = "none";
+        document.getElementById("submit_field").style.display = "inline";
+      }else
+      {
+        cpt1.style.display = "inline";
+        document.getElementById("submit_field").style.display = "none";
+      }
+    }
+    }
+  var button= document.getElementById('Submit');
+  stringContainsSubstring = function(string, substring) {
+    return (string.toString()).toLowerCase().indexOf((substring.toString()).toLowerCase()) != -1;
+}
+
+var button_captcha = document.getElementById('submit_captcha');
+
+button_captcha.onclick = function()
+{
+  var answer = document.getElementById("captcha_text").value;
+  if (answer == "")
+  {
+    alert("Please enter the code!");
+  }else
+  {
+    Meteor.call('check_answer_for_captcha', answer, function (error, result) {
+    if (error)
+    {
+      console.log(error);}
+    else {
+      if (result == false)
+      {
+        document.getElementById("submit_false").style.display = "inline";
+        document.getElementById("captcha_text").value = "";
+        document.getElementById("submit_false").style.color = "#8B0000";
+        setTimeout(() => { document.getElementById("submit_false").style.color = "#000000";}, 2000);
+      }
+
+      if (result == true)
+      {
+        location.reload();
+      }
+
+    }
+    }
+  );
+  }
+}
+  button.onclick = function()
+  {
+    var user = UserAdv.findOne({"_id" : Meteor.userId()});
+    CurrentIndex = 10;//user.currentIndex + 1;
+    if (user == undefined)
+    {
+        error_handle();
+    }
+    // if (user.ended)
+    // {
+    //     button.disabled = true;
+    //     return;
+    //
+    // }
+    dataPermission = displayRadioValue("dataPermission");
+    if (dataPermission == null || dataPermission == "" || dataPermission == undefined)
+    {
+      Swal.fire({
+            icon: 'warning',
+            title: 'You forgot one thing... :)',
+            html: '<p>We are almost there! Please also indicate your choice for the query: <b>"May we utilize the data we\'ve gathered from your participation?"</b> Thanks :)</p>',
+            width: '700px',  // Adjust this value as per your design preference
+            padding: '3em',  // Optional: You can adjust padding if needed
+            allowOutsideClick: false,
+            confirmButtonText: 'OK',
+            customClass: {
+                confirmButton: 'swal2-confirm'
+            }
+        });
+      return;
+    }
+    //nextIndex++;
+    document.getElementById('Submit').disabled = true;
+    var ifrm = "probablyFireFox";
+    if (document.location != undefined)
+    {
+      if (document.location.ancestorOrigins != undefined)
+      {
+        ifrm = ((document.location.ancestorOrigins[0] == undefined) ? "undefined" : document.location.ancestorOrigins[0]);
+      }
+      else
+      {
+        ifrm = ((document.referrer == undefined) ? "undefined" : document.referrer);
+      }
+    }
+    var date_end = new Date();
+    var milli_end = date_end.getTime();
+    var milli_start = user.start_time;
+    var total_time = -1;
+    if (milli_start != undefined){
+     total_time = (milli_end - milli_start) / (60 * 1000);
+    }
+    //Order.update(Meteor.userId(), { $set: { currentIndex : nextIndex }});
+    //fixed bonus
+    UserAdv.update(Meteor.userId(), { $set: { bonus : fixed_bonus, dataPermission : dataPermission, asi_fin : assignment_Id,end_frm : ifrm, currentIndex : CurrentIndex, ended : true, end_time : milli_end, total_time_sp : total_time }}, function( error, result) {
+      if ( error ) {error_handle();} //info about what went wrong
+      if ( result ) {
+        Bonus.insert({_id : Meteor.userId(),amtId: user.amtId , bonus : fixed_bonus, assignment_Id : user.assignment_Id}, function( error, result) {
+          if ( error ) {error_handle();} //info about what went wrong
+          if ( result ) {
+              Meteor.call('final_countdown', function (error, result) {
+
+                  if (error)
+                  {
+                    console.log(error);
+                  }
+                  else {
+                    if (stringContainsSubstring(result,"mturk.com"))
+                    {
+                      Meteor.setTimeout(function(){window.location.href = result;},500);
+                    }
+
+                  }
+                  }
+                );
+
+
+        } //the _id of new object if successful
+        });
+      } //the _id of new object if successful
+    });
+    // UserAdv.update(Meteor.userId(), { $set: { ended : true }});
+    // button.disabled = true;
+  }
+  </script>
+
+  {{/if}}
+</template>
+
+<template name = "taskDesign">
+
+     {{#if currentUser}}
+  <style>
+
+body
+{
+ background-color:#FFFFFF;
+
+}
+
+.node rect {
+    cursor: move;
+}
+.link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+}
+.link:hover {
+    stroke-opacity: .5;
+}
+text {
+    font: 14px sans-serif;
+}
+.linkLabel {
+    z-index:10;
+}
+
+
+.radiobtn {
+position: relative;
+display: block;
+text-align: left;
+}
+.radiobtn label {
+display: block;
+background: #B3B6B7;
+color: black;
+border-radius: 5px;
+padding: 10px 20px;
+border: 2px solid white;
+margin-bottom: 5px;
+cursor: pointer;
+}
+.radiobtn label:after, .radiobtn label:before {
+content: "";
+position: absolute;
+right: 11px;
+top: 11px;
+width: 20px;
+height: 20px;
+border-radius: 3px;
+background: black;
+
+}
+
+
+.radiobtn label:before {
+background: transparent;
+-webkit-transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+z-index: 2;
+overflow: hidden;
+background-repeat: no-repeat;
+background-size: 13px;
+background-position: center;
+width: 0;
+height: 0;
+background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNS4zIDEzLjIiPiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE0LjcuOGwtLjQtLjRhMS43IDEuNyAwIDAgMC0yLjMuMUw1LjIgOC4yIDMgNi40YTEuNyAxLjcgMCAwIDAtMi4zLjFMLjQgN2ExLjcgMS43IDAgMCAwIC4xIDIuM2wzLjggMy41YTEuNyAxLjcgMCAwIDAgMi40LS4xTDE1IDMuMWExLjcgMS43IDAgMCAwLS4yLTIuM3oiIGRhdGEtbmFtZT0iUGZhZCA0Ii8+PC9zdmc+);
+}
+
+.radiobtn input[type="radio"] {
+display: none;
+position: absolute;
+width: 100%;
+-webkit-appearance: none;
+ -moz-appearance: none;
+      appearance: none;
+}
+.radiobtn input[type="radio"]:checked + label {
+background: orange;
+-webkit-animation-name: blink;
+      animation-name: blink;
+-webkit-animation-duration: 1s;
+      animation-duration: 1s;
+border-color: white;
+}
+.radiobtn input[type="radio"]:checked + label:after {
+background: blue;
+
+}
+.radiobtn input[type="radio"]:checked + label:before {
+width: 20px;
+height: 20px;
+}
+
+@-webkit-keyframes blink {
+0% {
+background-color: #B3B6B7;
+}
+10% {
+background-color: #B3B6B7;
+}
+11% {
+background-color: #B3B6B7;
+}
+29% {
+background-color: #B3B6B7;
+}
+30% {
+background-color: #B3B6B7;
+}
+50% {
+background-color: #B3B6B7;
+}
+45% {
+background-color: #B3B6B7;
+}
+50% {
+background-color: #B3B6B7;
+}
+100% {
+background-color: #B3B6B7;
+}
+}
+
+@keyframes blink {
+0% {
+background-color: orange;
+}
+10% {
+background-color: orange;
+}
+11% {
+background-color: orange;
+}
+29% {
+background-color: orange;
+}
+30% {
+background-color: orange;
+}
+50% {
+background-color: orange;
+}
+45% {
+background-color: orange;
+}
+50% {
+background-color: orange;
+}
+100% {
+background-color: orange;
+}
+}
+
+.Button {
+  background-color: #555555;
+  border: outset;
+  color: white;
+  padding: 15px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button {
+  border: outset;
+  color: white;
+  padding: 1.2% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#wrapper2 {
+    display: none;
+}
+
+#ML_DECISION
+{
+    display: none;
+}
+
+#start-btn
+{
+  background-color: #555555;
+  border: outset;
+  color: white;
+  padding: 15px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  display: none;
+}
+
+.introjs-tooltip.introjs-floating {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0px 0px #fff;
+      -moz-box-shadow: 0 0 0px 0px #fff;
+      box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-bottom-left-aligned {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0px 0px #fff;
+      -moz-box-shadow: 0 0 0px 0px #fff;
+      box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-top-middle-aligned
+{
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0px 0px #fff;
+      -moz-box-shadow: 0 0 0px 0px #fff;
+      box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-top-left-aligned
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-left
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-right
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-bottom-middle-aligned
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltiptext
+{
+  text-align: left;
+}
+
+* {
+  box-sizing: border-box;
+}
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left
+{
+  float: left;
+  padding: 10px;
+  width: 25%;
+}
+
+.right
+{
+  float: left;
+  padding: 10px;
+  width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+#Avatar_Box
+{
+  border: 2px solid black;
+  background-color: white;
+  position: relative;
+  /* top: 10%; */
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.RedTexts
+{
+  color: var(--first-race-color);
+  text-align: left;
+}
+
+.BlueTexts
+{
+  color: var(--second-race-color);
+  text-align: left;
+}
+/* .B_Text
+{
+  padding-left: 20px;
+}
+
+.A_Text
+{
+  padding-left: 20px;
+} */
+
+.B_Text, .A_Text
+{
+  font-size: 16px;
+}
+#center_chart
+{
+  background-color: white;
+  position: relative;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 620px; /* was height: 650px; */
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 18px;
+  min-width: 1150px;
+  margin-left: 15px;
+}
+
+.hr3 {
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, #CCC, transparent);
+}
+
+#box1 {
+  position: relative;
+  float: right;
+  right: 16%;
+  width: 480px;
+  /* height: 580px; */
+}
+#box2 {
+  position: relative;
+  float: right;
+  right: 19%;
+  width: 480px;
+  /* height: 580px; */
+
+}
+
+.introjs-skipbutton
+{
+  visibility: hidden;
+}
+
+#indCount
+{
+  display: none;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#LoaderDive
+{
+  background-color: white;
+  position: absolute;
+  top: 20%;
+  left: 46%;
+  transform: translate(-46%, 0%);
+  display: none;
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.loaderMl {
+  border: 12px solid #f3f3f3; /* Light grey */
+  border-top: 12px solid aqua; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  top: 0%;
+  left: 46%;
+  transform: translate(-46%, 0%);
+
+
+}
+
+#MLLOAD
+{
+  text-align: center;
+  display: none;
+}
+
+/* #ML_DECISION
+{
+  width: 500px;
+  height: 500px;
+
+} */
+
+/* .link {
+    overflow:hidden;
+    position:relative;
+    display:inline-block;
+} */
+
+/* .link:after {
+    content:" ";
+    position:absolute;
+    display:block;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#fff;
+    z-index:2;
+    transition: all 2s ease;
+}
+
+.link.show:after {
+    left:100%
+} */
+
+.hr4 {
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, transparent, black, transparent);
+}
+
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="LoaderDive">
+<div class="loader"></div>
+<p style="position: relative; left: 25%; ">New Round is Loading...</p>
+</div>
+
+<div id="EntireThing" class="row">
+  <div class="left">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="Avatar_Box">
+      <img id="top_profile" src="{{getSrc}}" alt="Admin" style="width : 50%; border-radius: 50%;" >
+      <p id="nickname" style="margin-bottom : 0px;"><b>Name: </b>{{getNickname}}</p>
+
+    <div id="race" style="height: 35px; margin : 0px;"><b style="display:inline-block;margin-right:10px; width:50px;">Group:</b><p id="race_col" style="{{getStyle}}">&nbsp;{{getRace 2}}</p></div>
+    <p id="credibility"><b>Credit score range: </b>{{getCredibility}}</p>
+    <p id="years"><b>Credit history (years): </b>{{getYears}}</p>
+    <p id="rent"><b>Home ownership: </b>{{getOwnership 2}}</p>
+    <p id="career"><b>Small business industry: </b>{{getCareer}}</p>
+    <hr>
+    <p id="budget_up" class="text-muted font-size-sm" style='background-color: yellow; padding: 4px; border-radius:5px; border-color:#B8860B;border-style:solid'></p>
+    </div>
+  </div>
+  <div class="right" >
+    <h2 id="indCount">Round x out of 10</h2>
+    <input id="start-btn" style="background-color: indigo; border-color: indigo;" class = "Button" type = "submit" value = "Click Here to Start Tutorial!">
+    <form id="myForm">
+
+    <p class = "Option" style="font-size: 20px;"><b>Would you like to apply for a loan or not?</b></p>
+
+
+    <div class="radiobtn">
+    <input type="radio" id="Apply" name="question" value="Apply"> <label for="Apply">Apply for a loan!</label>
+    </div>
+    <div class="radiobtn">
+    <input type="radio"  id="End" name="question" value="End"> <label id="EndText" for="End">Leave the game, complete a brief survey and claim my bonus!</label>
+    </div>
+
+    <input id="apply_button" style="border-color: #4169E1; background-color: #4169E1;" class = "button" type = "submit" value = "Next">
+    </form>
+    <div id="budget_low_text"  style="display: none; text-align: center; color: red;  font-size: 18px;"><p>You have decided to apply for a loan in this round! As a result, your account balance has decreased by 50 coins!</p></div>
+    <div id="no_more_imp"  style="display: none; text-align: center; color: purple;  font-size: 18px;"><p>Since you are currently at the highest credit score range, no additional opportunities to improve credit scores are provided to you at this point.</p></div>
+    <div id="ML_DECISION">
+      <div id="MLLOAD">
+        <div class="loaderMl"></div>
+        <p>Please wait...the system is calculating.</p>
+        </div>
+     <hr class="hr3">
+    <h4 id="first_AI">AI system's decision on your application for this round:</h4>
+    <img id="ml_pic" src="edit-icon.jpg"  width="50">
+    <p id="big_decision" style="font-size: 16px;">This is a placeholder!</p>
+    <p id="small_decision" style="font-size: 16px;"> This means that ML algorithm made its decision and you will be getting a result here!</p>
+
+    </div>
+    <input id="me_button" class = "button" style="background-color: GoldenRod; border-color: GoldenRod;" type = "submit" value = "Reveal the AI system's decision on me!">
+    <br>
+    <input id="other_button" class = "button" style="background-color: DarkSlateGrey; border-color: DarkSlateGrey;" type = "submit" value = "Reveal the AI system's decision on all applicants!">
+    <div id="wrapper2">
+      <hr class="hr3">
+      <h4 id="others_text">AI system's decisions on all {{getSize}} applicants in this round:</h4>
+
+      <!-- <input id="animate_button"  style="background-color: red; border-color: red; color: white;" type = "submit" value = "animate"> -->
+    <!-- <div id="center_chart" style="height: 720px;"> -->
+    <div id="center_chart">
+
+    <div id="box1">
+      <p id="Blue_Group" style="color: blue;"><b>Group Blue</b></p>
+      <p id="chart_section_660_1" style="margin:0;"></p>
+      <div id="blue_area">
+      <h4 id="blue_line"  style="display: none; color: {{color_second_race}}; font-size: 16px; margin-top: 0px; margin-bottom: 20px; padding: 20px; background-color: white;">Zoom in to {{getBlueSize}} {{SECOND_RACE}} group applicants whose credit score is similar to yours.</h4>
+
+      <p id="chart_section1" style="display: none;"></p>
+      </div>
+      <!-- <div id="text_confusion" style="text-align: left;">
+        <p class="B_Text"><b>Among {{getText 22}} <span style='color:blue;'><b>blue group</b></span> applicants in this round, {{getText 23}} applicants’ ({{getText 24}}%) applications have been approved. More specifically:</b></p>
+        <div>
+        <p id= "BLUE_ABOVE_1" class="B_Text">For the {{getText 25}} ({{getText 26}}%) applicants whose credit score is higher than yours:</p>
+        <ul class="B_Text" style="">
+        <li id= "BLUE_ABOVE_2">{{getText 27}} of them ({{getText 28}}%) get their applications approved.</li>
+        <li id= "BLUE_ABOVE_3">{{getText 29}} of them ({{getText 30}}%) get their applications denied.</li>
+      </ul>
+      <p class="B_Text">For the {{getText 31}} ({{getText 32}}%) applicants whose credit score is same as yours:</p>
+      <ul class="B_Text" style="">
+      <li >{{getText 33}} of them ({{getText 34}}%) get their applications approved.</li>
+      <li >{{getText 35}} of them ({{getText 36}}%) get their applications denied.</li>
+      </ul>
+      <p class="B_Text">For the {{getText 37}} ({{getText 38}}%) applicants whose credit score is below than yours:</p>
+      <ul class="B_Text" style="">
+      <li >{{getText 39}} of them ({{getText 40}}%) get their applications approved.</li>
+      <li >{{getText 41}} of them ({{getText 42}}%) get their applications denied.</li>
+      </ul>
+        </div>
+      </div> -->
+
+    </div>
+
+    <div id="box2" >
+      <p id="Red_Group" style="color: red;"><b>Group FIRST_RACE</b></p>
+      <p id="chart_section_660" style="margin:0;"></p>
+      <div id="red_area">
+      <h4 id="red_line"  style="display: none; color: {{color_first_race}}; font-size: 16px; margin-top: 0px; margin-bottom: 20px; padding: 20px; background-color: white;">Zoom in to {{getRedSize}} {{FIRST_RACE}} group applicants whose credit score is similar to yours.</h4>
+      <p id="chart_section" style="display: none;"></p>
+      </div>
+
+      <!-- <div style="top: 70%; left: 20%;  position: absolute; width: 300px; height: 110px; border: 2px solid black; ">
+      </div> -->
+      <!-- <div id="text_confusion_A" style="text-align: left;">
+        <p class="A_Text"><b>Among {{getText 1}} <span style='color:red;'><b>red group</b></span> applicants in this round, {{getText 2}} applicants’ ({{getText 3}}%) applications have been approved. More specifically: </b></p>
+        <div>
+        <p id= "RED_ABOVE_1" class="A_Text">For the {{getText 4}} ({{getText 5}}%) applicants whose credit score is higher than yours:</p>
+        <ul style="font-size: 16px;">
+        <li id= "RED_ABOVE_2">{{getText 6}} of them ({{getText 7}}%) get their applications approved.</li>
+        <li id= "RED_ABOVE_3">{{getText 8}} of them ({{getText 9}}%) get their applications denied.</li>
+      </ul>
+      <p class="A_Text">For the {{getText 10}} ({{getText 11}}%) applicants whose credit score is same as yours:</p>
+      <ul style="font-size: 16px;">
+      <li>{{getText 12}} of them ({{getText 13}}%) get their applications approved.</li>
+      <li>{{getText 14}} of them ({{getText 15}}%) get their applications denied.</li>
+      </ul>
+      <p class="A_Text">For the {{getText 16}} ({{getText 17}}%) applicants whose credit score is below than yours:</p>
+      <ul style="font-size: 16px;">
+      <li>{{getText 18}} of them ({{getText 19}}%) get their applications approved.</li>
+      <li>{{getText 20}} of them ({{getText 21}}%) get their applications denied.</li>
+      </ul>
+        </div>
+
+      </div> -->
+
+    </div>
+
+
+
+
+    </div>
+    <input id="flwchart_btn" style="position: absolute; left: 60%; transform: translateX(-50%); display: none; margin-top: 10px; background-color: #3366ff; border-color: #3366ff;" class = "Button" type = "submit" value = "Reveal AI system's decisions on applicants with similar credit scores!">
+
+    <input id="nround-btn" style="position: absolute; left: 60%; transform: translateX(-50%); display: none; margin-top: 10px; background-color: indigo; border-color: indigo;" class = "Button" type = "submit" value = "Proceed to the next round!">
+
+    <!-- <input id="nround-btn" style="display: none;  margin-top: 10px; background-color: indigo; border-color: indigo;" class = "Button" type = "submit" value = "Proceed to the next round!"> -->
+    </div>
+        <h4 id="review_of_charts_text" class="A_Text" style="display : none;">Do you think that the AI system's decisions in this round is fair to red group applicants and blue group applicants? <br>Please briefly explain your answer with a few sentences.</h4>
+        <br id="review_break1" style="display : none;">
+        <br id="review_break2" style="display : none;">
+        <textarea id="review_of_charts" style="font-size: 18px; font-family: Times New Roman; display : none;" rows="10" cols="100"></textarea>
+        <br id="review_break" style="display : none;">
+
+  </div>
+
+</div>
+
+<script>
+  document.documentElement.style.setProperty('--first-race-color', color_first_race);
+  document.documentElement.style.setProperty('--second-race-color', color_second_race);
+
+
+  $(document).ready(function() {
+
+    // Update the text content based on the FIRST_RACE variable
+    let redGroupElement = $("#Red_Group");
+    redGroupElement.html(`<b>Group ${FIRST_RACE}</b>`);
+
+    // Update the color based on the color_first_race variable
+    redGroupElement.css("color", color_first_race);
+
+
+    // Update the text content based on the FIRST_RACE variable
+    let blueGroupElement = $("#Blue_Group");
+    blueGroupElement.html(`<b>Group ${SECOND_RACE}</b>`);
+
+    // Update the color based on the color_first_race variable
+    blueGroupElement.css("color", color_second_race);
+});
+
+
+// Initialize the Session variables or ReactiveVars
+
+  </script>
+
+{{else}}
+{{isUser}}
+
+ {{/if}}
+
+</template>

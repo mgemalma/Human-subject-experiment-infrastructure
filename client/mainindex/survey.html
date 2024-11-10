@@ -1,0 +1,493 @@
+<template name = "survey">
+  <style>
+    body
+    {
+      background-color: white;
+    }
+
+    #Main_Division
+    {
+      border: 2px solid black;
+      background-color: white;
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      /* height: 95%; */
+      width: 70%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 25px;
+      text-align: left;
+      font-size: 18px;
+      /* overflow: scroll; */
+      line-height: 1.08;
+
+    }
+
+    #center_sec
+    {
+      /* border: 2px solid black; */
+      background-color: white;
+      position: relative;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .Button {
+      background-color: red;
+      border-color: red;
+      color: white;
+      padding: 10px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .button {
+    border: outset;
+    color: white;
+    padding: 1.2% 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  html,body {padding:0;margin:0;}
+.wrap {
+  font:12px Arial, san-serif;
+}
+h1.likert-header {
+  padding-left:4.25%;
+  margin:20px 0 0;
+}
+form .statement {
+  display:block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 30px 0 0 4.25%;
+  margin-bottom:10px;
+}
+form .likert {
+  list-style:none;
+  width:100%;
+  margin:0;
+  padding:0 0 35px;
+  display:block;
+  border-bottom:2px solid #efefef;
+}
+form .likert:last-of-type {border-bottom:0;}
+form .likert:before {
+  content: '';
+  position:relative;
+  top:11px;
+  left:9.5%;
+  display:block;
+  background-color:#efefef;
+  height:4px;
+  width:78%;
+}
+form .likert li {
+  display:inline-block;
+  width:19%;
+  text-align:center;
+  vertical-align: top;
+}
+form .likert li input[type=radio] {
+  display:block;
+  position:relative;
+  top:0;
+  left:50%;
+  margin-left:-6px;
+
+}
+form .likert li label {width:100%;}
+form .buttons {
+  margin:30px 0;
+  padding:0 4.25%;
+  text-align:right
+}
+form .buttons button {
+  padding: 5px 10px;
+  background-color: #67ab49;
+  border: 0;
+  border-radius: 3px;
+}
+form .buttons .clear {background-color: #e9e9e9;}
+form .buttons .submit {background-color: #67ab49;}
+form .buttons .clear:hover {background-color: #ccc;}
+form .buttons .submit:hover {background-color: #14892c;}
+
+.attention_check_bonus{
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 0;
+        width: 0;
+        z-index: -1;
+    }
+
+    .blueBox {
+    padding: 15px;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    background-color: #e8f0fe;
+  }
+
+  .greenBox {
+    padding: 15px;
+    border: 1px solid #28A745;  /* Green border */
+    border-radius: 5px;
+    background-color: #e7f8ec;  /* Light green background */
+  }
+
+
+  </style>
+  <div id="Main_Division">
+    <h3>Survey Page 1 of 2</h3>
+    <div style="border: 2px solid #0077B5; padding: 20px; border-radius: 10px; background-color: #e6f7ff;">
+      <p style="font-size: 30px;"><b>One Last Step!</b></p>
+      <p>We need you to answer a few more questions about yourself and your thoughts on the bank's AI system before wrapping up.</p>
+      <p>We understand that following up a detailed task with a survey might not be ideal, but this information is needed for the student's data analysis. Please try to do your best. Once you complete the survey, you'll proceed to the debriefing where you can claim your payment and learn more about the study's true objectives. Thank you for sticking with us – we're almost there!</p>
+  </div>
+  
+    <form>
+      <div style="border: 2px solid #ffcc00; padding: 20px; border-radius: 10px; background-color: #ffebcc;">
+        <p style="font-size: 30px; text-align: center; background-color: #ffd633; padding: 10px; border-radius: 5px;"><b>Demographics Questions</b></p>
+      <p>1. <b>What is your age?</b></p>
+      <input type="radio"  id="option1" name="age" value="1">  <label for="option1">18-24 years old</label><br><br>
+      <input type="radio"  id="option2" name="age" value="2">  <label for="option2">25-34 years old</label><br><br>
+      <input type="radio"  id="option3" name="age" value="3">  <label for="option3">35-44 years old</label><br><br>
+      <input type="radio"  id="option4" name="age" value="4">  <label for="option4">45-54 years old</label><br><br>
+      <input type="radio" id="option5" name="age" value="5">  <label for="option5">55-64 years old</label><br><br>
+      <input type="radio" id="option6" name="age" value="6">  <label for="option6">65-74 years old</label><br><br>
+      <input type="radio" id="option7" name="age" value="7">  <label for="option7">75 years or older</label><br><br>
+     <p>2. <b>Which race or ethnicity best describes you? (Please choose only one.)</b></p>
+     <input type="radio" id="option1" name="race" value="1">  <label for="option1">American Indian or Alaskan Native</label><br><br>
+     <input type="radio" id="option2" name="race" value="2">  <label for="option2">Asian / Pacific Islander</label><br><br>
+     <input type="radio" id="option3" name="race" value="3">  <label for="option3">Black or African American</label><br><br>
+     <input type="radio" id="option4" name="race" value="4">  <label for="option4">Hispanic</label><br><br>
+     <input type="radio" id="option5" name="race" value="5">  <label for="option5">White / Caucasian</label><br><br>
+     <input type="radio" id="option5" name="race" value="6">  <label for="option6">Multiple ethnicity/ Other</label><br><br>
+
+  <p>3. <b>Please select the state you are in:</b></p>
+  <select id="state" style="border-color: #000000d7; background-color: #f8f8f8d7; padding: 5px 20px; font-size: 18px;">
+  <option value="NOT_SELECTED">Select Option</option>
+	<option value="AL">Alabama</option>
+	<option value="AK">Alaska</option>
+	<option value="AZ">Arizona</option>
+	<option value="AR">Arkansas</option>
+	<option value="CA">California</option>
+	<option value="CO">Colorado</option>
+	<option value="CT">Connecticut</option>
+	<option value="DE">Delaware</option>
+	<option value="DC">District Of Columbia</option>
+	<option value="FL">Florida</option>
+	<option value="GA">Georgia</option>
+	<option value="HI">Hawaii</option>
+	<option value="ID">Idaho</option>
+	<option value="IL">Illinois</option>
+	<option value="IN">Indiana</option>
+	<option value="IA">Iowa</option>
+	<option value="KS">Kansas</option>
+	<option value="KY">Kentucky</option>
+	<option value="LA">Louisiana</option>
+	<option value="ME">Maine</option>
+	<option value="MD">Maryland</option>
+	<option value="MA">Massachusetts</option>
+	<option value="MI">Michigan</option>
+	<option value="MN">Minnesota</option>
+	<option value="MS">Mississippi</option>
+	<option value="MO">Missouri</option>
+	<option value="MT">Montana</option>
+	<option value="NE">Nebraska</option>
+	<option value="NV">Nevada</option>
+	<option value="NH">New Hampshire</option>
+	<option value="NJ">New Jersey</option>
+	<option value="NM">New Mexico</option>
+	<option value="NY">New York</option>
+	<option value="NC">North Carolina</option>
+	<option value="ND">North Dakota</option>
+	<option value="OH">Ohio</option>
+	<option value="OK">Oklahoma</option>
+	<option value="OR">Oregon</option>
+	<option value="PA">Pennsylvania</option>
+	<option value="RI">Rhode Island</option>
+	<option value="SC">South Carolina</option>
+	<option value="SD">South Dakota</option>
+	<option value="TN">Tennessee</option>
+	<option value="TX">Texas</option>
+	<option value="UT">Utah</option>
+	<option value="VT">Vermont</option>
+	<option value="VA">Virginia</option>
+	<option value="WA">Washington</option>
+	<option value="WV">West Virginia</option>
+	<option value="WI">Wisconsin</option>
+	<option value="WY">Wyoming</option>
+</select>
+
+<p>4. <b>In general, would you describe your political party of affiliation as:</b></p>
+      <input type="radio" id="option1" name="p_aff" value="1">  <label for="option1">Democrat</label><br><br>
+      <input type="radio" id="option2" name="p_aff" value="2">  <label for="option2">Republican</label><br><br>
+      <input type="radio"  id="option3" name="p_aff" value="3">  <label for="option3">Independent</label><br><br>
+
+      <p>5. <b>In general, would you describe your political view as:</b></p>
+      <input type="radio" id="option1" name="p_view" value="1">  <label for="option1">Very liberal</label><br><br>
+      <input type="radio" id="option2" name="p_view" value="2">  <label for="option2">Liberal</label><br><br>
+      <input type="radio"  id="option3" name="p_view" value="3">  <label for="option3">Somewhat liberal</label><br><br>
+      <input type="radio"  id="option4" name="p_view" value="4">  <label for="option4">Moderate</label><br><br>
+      <input type="radio"  id="option5" name="p_view" value="5">  <label for="option5">Somewhat conservative</label><br><br>
+      <input type="radio"  id="option6" name="p_view" value="6">  <label for="option6">Conservative</label><br><br>
+      <input type="radio"  id="option7" name="p_view" value="7">  <label for="option7">Very conservative</label><br><br>
+
+      <p>6. <b>What is the highest degree or level of school you have completed (if currently enrolled, highest degree received)?</b></p>
+          <input type="radio" id="option1" name="school" value="1">  <label for="option1">No schooling completed</label><br><br>
+          <input type="radio" id="option2" name="school" value="2">  <label for="option2">Nursery school to 8th grade</label><br><br>
+          <input type="radio"  id="option3" name="school" value="3">  <label for="option3">Some high school, no diploma</label><br><br>
+          <input type="radio"  id="option4" name="school" value="4">  <label for="option4">High school graduate, diploma or the equivalent (for example: GED)</label><br><br>
+          <input type="radio"  id="option5" name="school" value="5">  <label for="option5">Some college credit, no degree</label><br><br>
+          <input type="radio"  id="option6" name="school" value="6">  <label for="option6">Trade/technical/vocational training</label><br><br>
+          <input type="radio" id="option7" name="school" value="7">  <label for="option7">Associate degree</label><br><br>
+          <input type="radio" id="option8" name="school" value="8">  <label for="option8">Bachelor’s degree</label><br><br>
+          <input type="radio" id="option9" name="school" value="9">  <label for="option9">Master’s degree</label><br><br>
+          <input type="radio" id="option10" name="school" value="10">  <label for="option10">Professional degree</label><br><br>
+          <input type="radio" id="option11" name="school" value="11">  <label for="option11">Doctorate degree</label><br><br>
+      
+        </div>
+        <div class="blueBox">
+          <p style="font-size: 30px; text-align: center; background-color: #6f7cf5; padding: 10px; border-radius: 5px;"><b>Fairness Awareness Questions</b></p>
+      <!--<p>For the statements below, please assume that a fair machine learning system is a system that makes its decisions <b><u>independently</u></b> from the sensitive traits of individuals (i.e., gender, ethnicity, sexual orientation, disability, etc.). Furthermore, please assume that an unfair machine learning system is a system that makes its decisions <b><u>solely</u></b> from the sensitive traits of the individuals (e.g., not lending loan to a deserving person just because of their gender.).</p>
+      <p><b>Do you agree with the following statements?</b></p>-->
+      <p>For the rest of the statements below about you (until the end of the survey), please indicate how much you agree with it.</p>
+      <p>7. <b>It is very important to me that an AI system making decisions about people is fair (i.e., it treats everyone fairly and does not discriminate).</b></p>
+      <ul class='likert'>
+      <li>
+        <input type="radio" name="fs_1" value="1">
+        <label>Strongly disagree</label>
+      </li>
+      <li>
+        <input type="radio" name="fs_1" value="2">
+        <label>Disagree</label>
+      </li>
+      <li>
+        <input type="radio" name="fs_1" value="3">
+        <label>Neutral</label>
+      </li>
+      <li>
+        <input type="radio" name="fs_1" value="4">
+        <label>Agree</label>
+      </li>
+      <li>
+        <input type="radio" name="fs_1" value="5">
+        <label>Strongly agree</label>
+      </li>
+    </ul>
+    <p>8. <b>I would only use an AI system if it is fair to everyone.</b></p>
+    <ul class='likert'>
+    <li>
+      <input type="radio" name="fs_2" value="1">
+      <label>Strongly disagree</label>
+    </li>
+    <li>
+      <input type="radio" name="fs_2" value="2">
+      <label>Disagree</label>
+    </li>
+    <li>
+      <input type="radio" name="fs_2" value="3">
+      <label>Neutral</label>
+    </li>
+    <li>
+      <input type="radio" name="fs_2" value="4">
+      <label>Agree</label>
+    </li>
+    <li>
+      <input type="radio" name="fs_2" value="5">
+      <label>Strongly agree</label>
+    </li>
+  </ul>
+  <p>9. <b id="att1">This is an attention check, please select "Strongly disagree".</b></p>
+  <ul class='likert'>
+  <li>
+    <input type="radio" name="attention_1" value="1">
+    <label>Strongly disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_1" value="2">
+    <label>Disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_1" value="3">
+    <label>Neutral</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_1" value="4">
+    <label>Agree</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_1" value="5">
+    <label>Strongly agree</label>
+  </li>
+</ul>
+  <p>10. <b>I would stop using an AI system if it is unfair, even if it tends to be in favor of me.</b></p>
+  <ul class='likert'>
+  <li>
+    <input type="radio" name="fs_3" value="1">
+    <label>Strongly disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_3" value="2">
+    <label>Disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_3" value="3">
+    <label>Neutral</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_3" value="4">
+    <label>Agree</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_3" value="5">
+    <label>Strongly agree</label>
+  </li>
+</ul>
+  <p>11. <b>When I decide whether to use an AI system or not, I seldom think about whether the system is fair.</b></p>
+  <ul class='likert'>
+  <li>
+    <input type="radio" name="fs_4" value="1">
+    <label>Strongly disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_4" value="2">
+    <label>Disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_4" value="3">
+    <label>Neutral</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_4" value="4">
+    <label>Agree</label>
+  </li>
+  <li>
+    <input type="radio" name="fs_4" value="5">
+    <label>Strongly agree</label>
+  </li>
+</ul>
+</div>
+<div class="greenBox">
+  <p style="font-size: 30px; text-align: center; background-color: #80c47e; padding: 10px; border-radius: 5px;"><b>Risk Taking Willingness Questions</b></p>
+<p>12. <b>If I were betting on horses and were a big winner in the third or fourth race, I would be more likely to stop playing and take my winnings. </b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="ra_1" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_1" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_1" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="ra_1" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="ra_1" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>13. <b>I like to do frightening things.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="ra_2" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_2" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_2" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="ra_2" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="ra_2" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>14. <b>I like new and exciting experiences, even if I have to break the rules.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="ra_3" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_3" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_3" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="ra_3" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="ra_3" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p class="attention_check_bonus">15. <b>This is an attention check, please select "Neutral".</b></p>
+  <ul class='likert attention_check_bonus'>
+  <li>
+    <input type="radio" name="attention_for_bonus" value="1">
+    <label>Strongly disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_for_bonus" value="2">
+    <label>Disagree</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_for_bonus" value="3">
+    <label>Neutral</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_for_bonus" value="4">
+    <label>Agree</label>
+  </li>
+  <li>
+    <input type="radio" name="attention_for_bonus" value="5">
+    <label>Strongly agree</label>
+  </li>
+</ul>
+</div>
+</form>
+    <div id="center_sec">
+      <input id="next_page" style="border-color: #4169E1; background-color: #4169E1; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Next">
+    </div>
+    </div>
+
+  </template>

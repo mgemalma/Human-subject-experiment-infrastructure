@@ -1,0 +1,564 @@
+<template name = "Improvement">
+<style>
+
+  body
+  {
+    background-color: grey;
+  }
+
+  #back
+  {
+    position: absolute;
+    background: url('matrix_image.jpeg') no-repeat center fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: -1;
+  }
+
+  #Instructions_Division
+  {
+    border: 2px solid black;
+    background-color: white;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    /* height: 95%; */
+    width: 70%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 25px;
+    text-align: left;
+    font-size: 18px;
+    /* overflow: scroll; */
+    line-height: 1.08;
+
+  }
+
+  .center_sec
+  {
+    /* border: 2px solid black; */
+    background-color: white;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .Button {
+    background-color: red;
+    border-color: red;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button {
+  border: outset;
+  color: white;
+  padding: 1.2% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#LoaderDive
+{
+  background-color: white;
+  position: absolute;
+  top: 20%;
+  left: 46%;
+  transform: translate(-46%, 0%);
+  display: none;
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.loaderMl {
+  border: 12px solid #f3f3f3; /* Light grey */
+  border-top: 12px solid #0A1172; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  position: relative;
+  top: 0%;
+  left: 46%;
+  transform: translate(-46%, 0%);
+
+
+}
+
+.introjs-tooltip.introjs-floating {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0px 0px #fff;
+      -moz-box-shadow: 0 0 0px 0px #fff;
+      box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-bottom-left-aligned {
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0px 0px #fff;
+      -moz-box-shadow: 0 0 0px 0px #fff;
+      box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-top-middle-aligned
+{
+    background-color: #FFFFFF;
+    min-width: 450px;
+    max-width: 450px;
+    -webkit-box-shadow: 0 0 0px 0px #fff;
+      -moz-box-shadow: 0 0 0px 0px #fff;
+      box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-top-left-aligned
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-left
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-right
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltip.introjs-bottom-middle-aligned
+{
+  background-color: #FFFFFF;
+  min-width: 450px;
+  max-width: 450px;
+  -webkit-box-shadow: 0 0 0px 0px #fff;
+    -moz-box-shadow: 0 0 0px 0px #fff;
+    box-shadow: 0 0 0px 0px #fff;
+}
+
+.introjs-tooltiptext
+{
+  text-align: left;
+}
+
+
+.introjs-skipbutton
+{
+  visibility: hidden;
+}
+
+#message { position: relative;
+    top: -50px;
+    color: #8B0000;
+}
+
+</style>
+
+<!-- <img id="coin_image" src="https://cdn-icons-png.flaticon.com/512/217/217853.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="15"> -->
+<link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+<div id="back">
+  </div>
+<div id="Instructions_Division">
+  <div class="center_sec">   <input id="start_btn" style="display: none; border-color: black; background-color: rebeccapurple; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Click here to continue tutorial">
+    <input id="continue_tutorial" style="display: none; border-color: black; background-color: rebeccapurple; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Click here to continue tutorial!">
+
+  </div>
+  <p  style="font-size: 30px; color: #0A1172;"><b id="text2">You’ve got a chance to improve your credit score!</b></p>
+  <p><b id="text1">Before you submit your loan application, would you like to try to improve your credit score?</b></p>
+  <p><b>If so, you can pay {{cost}} coins to hire a credit management expert to conduct a review of your credit profile. Based on their experience, the credit management expert will take some actions to help you improve the credit score.</b></p>
+  <p><b><b id="text4"></b> Note that the actions that the credit management expert takes are not guaranteed to improve your credit score. If the improvement is successful, your credit score range will increase by 50 points. Otherwise, your credit score range will remain unchanged!</b></p>
+  <div id="intro_sec">
+  <p id="budget_p" style="height: 20px; background-color: #438EC8; padding: 4px; border-radius:5px; border-color: #311432; border-style:solid"><b>Your Available Balance: </b><b id="coin"> {{getBudget}} coins </b></p>
+  <div class="center_sec">
+    <div id="MLLOAD" style="display: none;">
+      <p style="color: #438EC8;"><b>The credit management expert you hired is reviewing your credit profile and identifying actions to take to improve your credit score...</b></p>
+      <img id="Avatar1" src="images/199700133-10212369-0.png" style="position: relative; border-radius: 50%; float: left; left: 20%; border-color: black; border-style:solid" alt="Admin" class="rounded-circle" width="100">
+      <img id="Work" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5ga65GMQajxpcGHK_AoWSwPo2CfW7i6F43yy6t25rTWgtSrXcdjFSSq6INUSkRTZ6Lak&usqp=CAU" style="position: relative; border-radius: 50%; float: right; right: 20%;" alt="Admin" class="rounded-circle" width="100">
+      <div class="loaderMl"></div>
+      </div>
+      <div id="result">
+        <div id="group">
+      <img id="ml_pic" src="edit-icon.jpg"  width="50">
+      <p id="small_decision" style="font-size: 16px; font-weight: bold;"> This means that ML algorithm made its decision and you will be getting a result here!</p>
+      </div>
+      <input id="continue_btn" style="border-color: black; background-color: green; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Submit the loan application!">
+    </div>
+    <div id="buttons">
+      <input id="Improvement" style="border-color: black; background-color: #0A1172; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Improve!">
+      <br>
+      <input id="Next" style="border-color: black; background-color: rebeccapurple; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "No, just continue!">
+      </div>
+  </div>
+  </div>
+  
+  </div>
+
+
+  <script>
+
+// Global object to save original styles for multiple buttons
+let originalStylesImp = {};
+
+function saveOriginalStylesImp(buttonId) {
+    const button = document.getElementById(buttonId);
+    // Save the original styles for the specific buttonId
+    originalStylesImp[buttonId] = {
+        backgroundColor: button.style.backgroundColor,
+        color: button.style.color,
+        border: button.style.border
+    };
+}
+
+function disableButtonImp(buttonId) {
+    const button = document.getElementById(buttonId);
+    if (button.style.backgroundColor === "rgb(204, 204, 204)") {
+        return;
+    }
+    saveOriginalStylesImp(buttonId); // save the original styles for the buttonId
+    button.disabled = true;
+    button.style.backgroundColor = "#cccccc";
+    button.style.color = "#666666";
+    button.style.border = "1px solid #999999";
+}
+
+function enableButtonImp(buttonId) {
+    const button = document.getElementById(buttonId);
+    // If the original style is saved for the buttonId, apply it
+    if (originalStylesImp[buttonId]) {
+        button.disabled = false;
+        button.style.backgroundColor = originalStylesImp[buttonId].backgroundColor;
+        button.style.color = originalStylesImp[buttonId].color;
+        button.style.border = originalStylesImp[buttonId].border;
+    }
+}
+
+
+
+    var button_improvement = document.getElementById("Improvement");
+    var button_next = document.getElementById("Next");
+    var continue_btn = document.getElementById("continue_btn");
+    var start_btn = document.getElementById("start_btn");
+    var continue_tutorial = document.getElementById("continue_tutorial");
+    var start_btn = document.getElementById("start_btn");
+    start_btn.onclick = function()
+    {
+      document.getElementById("Improvement").style.display = 'inline';
+      document.getElementById("Next").style.display = 'inline';
+      document.getElementById("Next").disabled = true;
+      start_btn.style.display = 'none';
+      var intro = introJs();
+  intro.setOptions({
+    steps: [
+      {
+        intro: "<p>You are now provided with an opportunity to improve your credit score <b> with a cost of {{cost}} coins </b> by hiring a credit management expert to review and improve your credit profile.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#buttons'),
+        intro: "<p><b>You are free to decide whether you want to make this improvement attempt or not</b>. Note that even if you choose to make this attempt, your credit score is <b>not</b> guaranteed to be improved.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#Improvement'),
+        intro: "<p>Now, let’s try to improve the credit score and see what will happen!</p>"
+      }
+  ]
+});
+
+intro.oncomplete(function(){
+  document.getElementById("Improvement").disabled = false;
+  if (detectBrowser() == "Safari"){
+  var itm = document.getElementsByClassName('introjs-tooltipReferenceLayer');
+  if (itm == undefined)
+  {
+    return;
+  }
+  for(i = 0; i < itm.length; i++)
+  {
+      itm[i].remove();
+  }}
+});
+
+try {
+  intro.setOptions({
+    exitOnOverlayClick: false,
+    exitOnEsc: false
+  }).start();
+}
+catch(err) {
+error_handle();
+}
+}
+
+
+    continue_tutorial.onclick = function()
+    {
+      
+      continue_tutorial.style.display = "none";
+      document.getElementById("continue_btn").style.display = "inline";
+      document.getElementById("continue_btn").disabled = true;
+      var intro = introJs();
+  intro.setOptions({
+    steps: [
+      {
+        element: document.querySelector('#budget_p'),
+        intro: "<p>Each credit improvement attempt will cost you {{cost}} coins. As a result, {{cost}} coins have been deducted from your account.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#group'),
+        intro: "<p>Here, you will find out whether your credit score improvement is successful. If your improvement is successful, which is the case here, your credit score range will increase by 50 points. Otherwise, when the improvement is not successful, your credit score range will not be changed.</p>"
+      }
+      ,
+      {
+        element: document.querySelector('#continue_btn'),
+        intro: "<p>Once you finish reviewing your credit score improvement results, click this button to submit your loan application to the bank. The AI system used by the bank will then query your most updated credit score (which will typically fall into your most updated credit score range) and makes its loan decision on you for this round!</p>"
+      }
+  ]
+});
+
+intro.oncomplete(function(){
+  document.getElementById("continue_btn").disabled = false;
+  
+  if (detectBrowser() == "Safari"){
+  var itm = document.getElementsByClassName('introjs-tooltipReferenceLayer');
+  if (itm == undefined)
+  {
+    return;
+  }
+  for(i = 0; i < itm.length; i++)
+  {
+      itm[i].remove();
+  }}
+});
+
+try {
+  intro.setOptions({
+    exitOnOverlayClick: false,
+    exitOnEsc: false
+  }).start();
+}
+catch(err) {
+error_handle();
+}
+    }
+    button_next.onclick = function()
+    {
+      disableButtonImp("Next");
+      swal({
+        title: 'Are you sure?',
+        text: "By selecting this option, you will continue without attempting to improve your credit score.",
+        type: 'warning',
+        allowOutsideClick: false,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Cancel',
+        cancelButtonText: 'Yes, continue!'
+      }).then(function(isConfirm) {
+        enableButtonImp("Next");
+        if (isConfirm.value===true) {
+          console.log("isConfirm in if: " + isConfirm);
+          // document.getElementById("myForm").reset();
+
+        } else {
+          console.log("isConfirm in else: ");
+          //CurrentIndex = 7;//++order.currentIndex;
+          document.getElementById("Improvement").disabled = true;
+          var timeoutId = setTimeout(() => {amtLinkRefresh();}, 10000);
+          just_here_cpy = true;
+          has_seen_cpy = true;
+          UserAdv.update(Meteor.userId(), { $set: { improvementScreen : false, hasSeen : has_seen_cpy, just_here : just_here_cpy  }}, function( error, result) {
+            if ( error ) {error_handle();} //info about what went wrong
+            if ( result ) {location.reload();} //the _id of new object if successful
+          });
+          //location.reload();
+        }
+      });
+    }
+    button_improvement.onclick = function()
+    {
+      //console.log("here");
+      disableButtonImp("Improvement");
+      var user = UserAdv.findOne({"_id" : Meteor.userId()});
+
+
+
+      if (user == null)
+      {
+        error_handle();
+      }
+      if (!user.tutorial){
+        var prv_str = "You will pay " + improvement_cost + " coins to hire a credit management expert to review your credit profile.";
+        swal({
+        title: 'Are you sure?',
+        text: prv_str,
+        type: 'warning',
+        allowOutsideClick: false,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, continue!',
+        cancelButtonText: 'Cancel'
+      }).then(function(isConfirm) {
+        enableButtonImp("Improvement");
+        if (isConfirm.value===true) {
+          document.getElementById("Improvement").disabled = true;
+          document.getElementById("Next").disabled = true;
+          document.getElementById("Improvement").style.border = "1px solid #999999";
+          document.getElementById("Improvement").style.backgroundColor = "#cccccc";
+          document.getElementById("Improvement").style.color = "#666666";
+          var timeoutId = setTimeout(() => {
+            amtLinkRefresh();
+          }, 10000);
+          var credit =  user.index_credit;
+      var which = user.improvementScheme;
+      var imp_prob = 0;
+      if (credit == credit_ranges.length - 1)
+      {
+        return;
+      }
+      //console.log(credit_ranges.length);
+      //return;
+      if (which == 0)
+      {
+        imp_prob = improvement_probabilities[0][0];
+      }
+      if (which == 1)
+      {
+
+        imp_prob = improvement_probabilities[1][credit];
+      }
+      if (which == 2)
+      {
+
+        imp_prob = improvement_probabilities[2][credit];
+      }
+
+      // document.getElementById("Improvement").style.display = "none";
+      // document.getElementById("Next").style.display = "none";
+      // document.getElementById("Avatar1").src = user.image_url;
+      var variable = Math.random();
+      if (DEBUG === 1)
+      {
+        alert(imp_prob);
+        alert(variable);
+      }
+      
+      var isSucces = false;
+      if (!user.tutorial)
+      {
+        isSucces = (variable < imp_prob);
+      } else 
+      {
+        isSucces = true;
+      }
+    
+      budget_handler(isSucces, 2);
+      
+      clearTimeout(timeoutId);
+
+        } else {
+          console.log("cancelled");
+        }
+      });
+
+      
+    }else
+    {
+      enableButtonImp("Improvement");
+      var timeoutId = setTimeout(() => {
+        amtLinkRefresh();
+          }, 10000);
+      budget_handler(true, 2);
+      clearTimeout(timeoutId);
+    }
+
+    }
+
+    continue_btn.onclick = function()
+    {
+      var user = UserAdv.findOne({"_id" : Meteor.userId()});
+      if (user == null)
+      {
+        error_handle();
+      }
+      if (butonRef('continue_btn'))
+      {
+          return;
+      }
+      TaskIndex = ++user.tutInd;
+      UserAdv.update(Meteor.userId(),{
+        $set:{
+          tutInd : TaskIndex, improvementScreen : false, isSucces : false
+        }
+
+      }, function( error, result) {
+        if ( error ) {error_handle();} //info about what went wrong
+        if ( result ) {
+            location.reload();
+        }
+      });
+    }
+
+
+    </script>
+
+</template>

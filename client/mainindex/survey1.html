@@ -1,0 +1,510 @@
+<template name = "survey_1">
+  <style>
+    body
+    {
+      background-color: white;
+    }
+
+    #Main_Division
+    {
+      border: 2px solid black;
+      background-color: white;
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      /* height: 95%; */
+      width: 70%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 25px;
+      text-align: left;
+      font-size: 18px;
+      /* overflow: scroll; */
+      line-height: 1.08;
+
+    }
+
+    #center_sec
+    {
+      /* border: 2px solid black; */
+      background-color: white;
+      position: relative;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .Button {
+      background-color: red;
+      border-color: red;
+      color: white;
+      padding: 10px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .button {
+    border: outset;
+    color: white;
+    padding: 1.2% 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  html,body {padding:0;margin:0;}
+.wrap {
+  font:12px Arial, san-serif;
+}
+h1.likert-header {
+  padding-left:4.25%;
+  margin:20px 0 0;
+}
+form .statement {
+  display:block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 30px 0 0 4.25%;
+  margin-bottom:10px;
+}
+form .likert {
+  list-style:none;
+  width:100%;
+  margin:0;
+  padding:0 0 35px;
+  display:block;
+  border-bottom:2px solid #efefef;
+}
+form .likert:last-of-type {border-bottom:0;}
+form .likert:before {
+  content: '';
+  position:relative;
+  top:11px;
+  left:9.5%;
+  display:block;
+  background-color:#efefef;
+  height:4px;
+  width:78%;
+}
+form .likert li {
+  display:inline-block;
+  width:19%;
+  text-align:center;
+  vertical-align: top;
+}
+form .likert li input[type=radio] {
+  display:block;
+  position:relative;
+  top:0;
+  left:50%;
+  margin-left:-6px;
+
+}
+form .likert li label {width:100%;}
+form .buttons {
+  margin:30px 0;
+  padding:0 4.25%;
+  text-align:right
+}
+form .buttons button {
+  padding: 5px 10px;
+  background-color: #67ab49;
+  border: 0;
+  border-radius: 3px;
+}
+form .buttons .clear {background-color: #e9e9e9;}
+form .buttons .submit {background-color: #67ab49;}
+form .buttons .clear:hover {background-color: #ccc;}
+form .buttons .submit:hover {background-color: #14892c;}
+
+
+.greenBox {
+    padding: 15px;
+    border: 1px solid #28A745;  /* Green border */
+    border-radius: 5px;
+    background-color: #e7f8ec;  /* Light green background */
+  }
+
+  .purpleBox {
+    padding: 15px;
+    border: 1px solid #9c27b0;  /* Purple border */
+    border-radius: 5px;
+    background-color: #f3e5f5;  /* Light purple background */
+  }
+
+  .greyBox {
+    padding: 15px;
+    border: 1px solid #9e9e9e;  /* Grey border */
+    border-radius: 5px;
+    background-color: #f5f5f5;  /* Light grey background */
+  }
+  </style>
+  <div id="Main_Division">
+    <h3>Survey Page 2 of 2</h3>
+    
+    <form>
+      <div class="greenBox">
+<p>1. <b>I prefer friends who are exciting and unpredictable.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="ra_4" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_4" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_4" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="ra_4" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="ra_4" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>2. <b>In general, it is very easy for me to accept taking risks.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="ra_5" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_5" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="ra_5" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="ra_5" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="ra_5" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+</div>
+<div class="purpleBox">
+  <p style="font-size: 30px; text-align: center; background-color: #ba68c8; padding: 10px; border-radius: 5px;"><b>Empathy Questions</b></p>
+<p>3. <b>I remain unaffected when someone close to me is happy.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="emp_1" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_1" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_1" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="emp_1" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="emp_1" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>4. <b>I enjoy making other people feel better.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="emp_2" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_2" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_2" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="emp_2" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="emp_2" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>5. <b>I get a strong urge to help when I see someone who is upset.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="emp_3" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_3" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_3" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="emp_3" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="emp_3" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>6. <b>When I see someone being treated unfairly, I do not feel very much pity for them.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="emp_4" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_4" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_4" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="emp_4" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="emp_4" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>7. <b>When I see someone being taken advantage of, I feel kind of protective towards him\her.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="emp_5" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_5" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="emp_5" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="emp_5" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="emp_5" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+</div>
+<div class="greyBox">
+  <p style="font-size: 30px; text-align: center; background-color: #bdbdbd; padding: 10px; border-radius: 5px;"><b>Perceptions of AI Fairness Questions</b></p>
+<p><br>For each of the statements below about the bank's AI-powered system that determines whether to approve people's loan applications or not, please indicate how much you agree with it.</p>
+
+<p>8. <b>The bank's AI system is fair.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="fp_1" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_1" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_1" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="fp_1" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="fp_1" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>9. <b>The bank's AI system is fair to loan applicants.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="fp_2" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_2" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_2" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="fp_2" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="fp_2" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>10. <b>The bank's AI system is fair to manage loan applications.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="fp_3" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_3" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_3" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="fp_3" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="fp_3" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>11. <b id="att2">This is an attention check, please select "Strongly agree".</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="attention_2" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="attention_2" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="attention_2" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="attention_2" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="attention_2" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+<p>12. <b>The decisions that the bank makes as a result of the AI system will be fair.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="fp_4" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_4" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_4" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="fp_4" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="fp_4" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+
+<p>13. <b>The bank's AI system will lead the bank to make great loan lending decisions.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="fp_5" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_5" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_5" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="fp_5" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="fp_5" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+
+
+<p>14. <b>The bank's AI system will make mistakes.</b></p>
+<ul class='likert'>
+<li>
+  <input type="radio" name="fp_6" value="1">
+  <label>Strongly disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_6" value="2">
+  <label>Disagree</label>
+</li>
+<li>
+  <input type="radio" name="fp_6" value="3">
+  <label>Neutral</label>
+</li>
+<li>
+  <input type="radio" name="fp_6" value="4">
+  <label>Agree</label>
+</li>
+<li>
+  <input type="radio" name="fp_6" value="5">
+  <label>Strongly agree</label>
+</li>
+</ul>
+<p id="fairness_question_text">15. <b id="inside">A question will appear here after you answer 8 - 14.</b></p>
+<textarea id="fairness_text" style="width: 100%; font-size: 18px; font-family: Times New Roman;" rows="10" cols="100"></textarea>
+</div>
+</form>
+    <div id="center_sec">
+      <input id="next_page" style="border-color: #4169E1; background-color: #4169E1; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Next">
+    </div>
+    </div>
+
+  </template>

@@ -1,0 +1,297 @@
+<template name = "qualification">
+  <style>
+    body
+    {
+      background-color: white;
+    }
+
+    #Instructions_Division
+    {
+      border: 2px solid black;
+      background-color: white;
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      /* height: 95%; */
+      width: 70%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 25px;
+      text-align: left;
+      font-size: 18px;
+      /* overflow: scroll; */
+      line-height: 1.08;
+
+    }
+
+    #center_sec
+    {
+      /* border: 2px solid black; */
+      background-color: white;
+      position: relative;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      background-color: white;
+      padding: 0px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .Button {
+      background-color: red;
+      border-color: red;
+      color: white;
+      padding: 10px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .button {
+    border: outset;
+    color: white;
+    padding: 1.2% 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .image_div
+  {
+
+    width: 70%;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 0px;
+    text-align: center;
+
+  }
+
+  #image{
+    margin-top: 10px;
+    box-shadow: 5px 5px 5px 5px gray;
+    width: 60px;;
+    padding: 20px;
+    font-weight: 400;
+    padding-bottom: 0px;
+    height: 40px;
+    user-select: none;
+    text-decoration:line-through;
+    font-style: italic;
+    font-size: x-large;
+    border: red 2px solid;
+    margin-left: 10px;
+     
+}
+#user-input{
+    box-shadow: 5px 5px 5px 5px gray;
+    width:auto;
+       margin-right: 10px;
+    padding: 10px;
+    padding-bottom: 0px;
+    height: 40px;
+       border: red 0px solid;
+}
+input{
+    border:1px black solid;
+}
+.inline{
+    display:inline-block;
+}
+#btn{
+    box-shadow: 5px 5px 5px grey;
+    color: aqua;
+    margin: 10px;
+    background-color: brown;
+}
+
+/* Styling for the hint buttons */
+#Instructions_Division div[id^="hintSection"] button {
+    display: none; 
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    color: white; /* White text */
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px 16px 2px; /* Added 12px margin-bottom */
+    cursor: pointer;
+    border-radius: 8px; /* Rounded corners */
+    transition-duration: 0.4s; /* Smooth transition for hover effect */
+
+    /* Adding a subtle shadow for depth */
+    box-shadow: 2px 2px 12px #aaa;
+}
+
+/* Hover effect for the hint buttons */
+#Instructions_Division div[id^="hintSection"] button:hover {
+    background-color: #45a049; /* Slightly darker green */
+}
+
+#Instructions_Division div[id^="hintSection"] {
+    color: green;  /* Makes the text green */
+    padding-bottom: 15px;  /* Adds padding below the text */
+}
+
+.grecaptcha-badge { visibility: hidden; }
+
+  </style>
+
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="captcha.css">
+    <link rel="stylesheet" href=
+"https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity=
+"sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+        crossorigin="anonymous">
+    <script src="captcha.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+  <div id="Instructions_Division">
+    <p style="font-size: 30px;"><b>Qualification Test</b></p>
+
+    <p>Before you start the game, let's check to see whether you have understood how to play this game! Please answer all of the questions below to proceed to the game!</p>
+    <form>
+      <p>1. Suppose in one round, you decide to apply for a loan but do not try to improve your credit score, and then the bank denies your application. How will your account balance change?</p>
+      <div id="hintSection1">
+        <button name="button_hint" onclick="showHint('hintSection1')">Need hint?</button>
+    </div>
+      <input type="radio" id="increase50" name="first" value="Increase50">
+      <label for="true">Increase by 50 coins</label><br>
+      <input type="radio" id="increase100" name="first" value="Increase100">
+      <label for="true">Increase by 100 coins</label><br>
+      <input type="radio" id="decrease50" name="first" value="Decrease50">
+      <label for="false">Decrease by 50 coins</label><br>
+      <input type="radio" id="nochange" name="first" value="NoChange">
+      <label for="false">No change</label><br>
+      <p>2. What is the number of rounds that you need to apply for loans in this game?</p>
+      <div id="hintSection2">
+        <button name="button_hint" onclick="showHint('hintSection2')">Need hint?</button>
+    </div>
+    
+      <input type="radio" id="ten" name="second" value="Ten">
+      <label for="true1">10 rounds</label><br>
+      <input type="radio" id="self" name="second" value="SelfDecide">
+      <label for="false2">At least one round but the specific number is decided by me</label><br>
+      <p>3. Suppose you decide to make the improvement attempt before submitting your loan application in one round. What will happen to your credit score and how will your account balance change?</p>
+      <div id="hintSection3">
+        <button name="button_hint" onclick="showHint('hintSection3')">Need hint?</button>
+    </div>
+    
+      <input type="radio" id="f" name="imp" value="f">
+      <label for="true">Credit score will increase by 50 points for sure, and the account balance will not change.</label><br>
+      <input type="radio" id="s" name="imp" value="s">
+      <label for="true">Credit score will increase by 50 points for sure, and the account balance will decrease by {{cost}} coins for sure.</label><br>
+      <input type="radio" id="t" name="imp" value="t">
+      <label for="false">Credit score may or may not increase, but the account balance will decrease by {{cost}} coins for sure.</label><br>
+      <input type="radio" id="fo" name="imp" value="fo">
+      <label for="false">Credit score may or may not increase; the account balance will decrease by {{cost}} coins if credit score increases by 50 points, otherwise the account balance will not change.</label><br>
+      
+      <p id="help_text" style="font-size: 20px; color: #00457C; display: none; background-color: #E0F7FA; padding: 20px; border-radius: 10px; border: 2px solid #B2EBF2;">
+        <b>If you have any questions about the quiz or face challenges, please reach out to us. While we designed this quiz and its hints to be user-friendly, we understand there might be moments of frustration. Remember, you're welcome to attempt the quiz unlimited times, but we're always here to assist. Contact us at <a href="mailto:purdue.crowdsourcing.lab@gmail.com" style="color: #0077B5; text-decoration: underline;">purdue.crowdsourcing.lab@gmail.com</a>.</b>  </p>
+      
+      <p>Suppose Alice is playing this game. In one round of the game, the AI system's decisions on all applicants in that round is shown to Alice as the following chart. Please use this chart to answer the next question:</p>
+      <div id="image_div_0" class="image_div">
+      <img src="chart.png" style="width: 100%;">
+      </div>
+      <p>4. In Group {{SECOND_RACE}}, how many people have a Credit Score {{threshold}}+ and their loan applications are approved?</p>
+      <div id="hintSection4">
+        <button name="button_hint" onclick="showHint('hintSection4')">Need hint?</button>
+    </div>
+    
+      <input type="radio" id="first" name="third" value="1683">
+      <label for="first">1683</label><br>
+      <input type="radio" id="second" name="third" value="1397">
+      <label for="second">1397</label><br>
+      <input type="radio" id="third" name="third" value="1642">
+      <label for="third">1642</label><br>
+      <input type="radio" id="fourth" name="third" value="1423">
+      <label for="fourth">1423</label><br>
+      <p>In the same round of the game, a zoomed in view of the AI system's decisions on all applicants whose credit score is close to Alice is also shown to her by the following chart. Please use this chart to answer the next question:</p>
+      <div id="image_div_1" class="image_div">
+        <img src="chart_1.png" style="width: 100%;">
+        </div>
+        <p>5. In this round, among all {{FIRST_RACE}} group applicants whose credit score is one level above Alice's credit score, what is the fraction of applicants who get their loan applications denied? <i>(According to the flowchart, Alice's credit score range is [550 - 600] since that box has a dark yellow color.)</i></p>
+        <div id="hintSection5">
+          <button name="button_hint" onclick="showHint('hintSection5')">Need hint?</button>
+      </div>
+      
+        <input type="radio" id="first1" name="fourth" value="45%">
+        <label for="first1">45%</label><br>
+        <input type="radio" id="second2" name="fourth" value="43%">
+        <label for="second2">43%</label><br>
+        <input type="radio" id="third3" name="fourth" value="52%">
+        <label for="third3">52%</label><br>
+        <input type="radio" id="fourth4" name="fourth" value="20%">
+        <label for="fourth4">20%</label><br>
+
+        
+    
+    </form>
+    <div id="center_sec">
+      <div id="center_sec">
+        <input id="next_page" style="display: none; border-color: #4169E1; background-color: #4169E1; padding: 10px 20px; font-size: 18px;" class="g-recaptcha button" 
+        data-sitekey="6LcpFoskAAAAACnJQqzS7PGVfoclHPyjPXJeONKP" 
+        data-callback='results_submit' type = "submit" value = "Click Here for Next Page!">
+      </div>
+    <div id="CAPTCHA">
+      <div id="user-input" class="inline">
+        <input type="text" id="submit"
+            placeholder="enter the captcha code" />
+    </div>
+  
+    <div class="inline" onclick="generate()">
+        <i class="fas fa-sync"></i>
+    </div>
+  
+    <div id="image" class="inline" selectable="False">
+    </div>
+    <input type="submit" id="btn" onclick="printmsg()" />
+  
+    <p id="key"></p>
+       </div>
+      </div>
+      </div>
+    
+   <script>
+     function showHint(sectionId) {
+    var hint;
+
+    switch (sectionId) {
+        case "hintSection1":
+            hint = "Without improving your credit score, the main cost to consider is the bank's loan application fee of 50 coins. If your loan is approved, you will receive 100 coins, but since you paid 50 coins as the loan application fee, your net gain is 50 coins. However, if it's denied, you just lose 50 coins.";
+            break;
+        case "hintSection2":
+            hint = "Except for the first round where participation is mandatory, you have full freedom to decide when to leave.";
+            break;
+        case "hintSection3":
+            hint = "Let's focus exclusively on improvement. In the real world, experts charge for their efforts to improve your credit score, as they invest time regardless of the outcome. Similarly, in this game, trying to improve your credit score will definitely cost you 5 coins. However, it's unpredictable whether your score will actually improve or stay the same.";
+            break;
+        case "hintSection4":
+            hint = "For the \"Group Female\", consult the appropriate flowchart. Within this flowchart, the upper left box represents female group applicants with a credit score of 650 or higher. To determine how many of their loan applications are approved, refer to the number on the dark blue arrow.";
+            break;
+        case "hintSection5":
+            hint = "In our experiment, we aim to make it easier for participants to quickly identify their credit scores on the flowchart. To achieve this, we\'ve highlighted every participant\'s credit score in a golden/yellow shade. This includes both the male and female group flowcharts, which sit side by side – the male applicants on the left and the female applicants on the right. Each flowchart displays the same three credit score levels. For illustrative purposes, we introduce Alice, a hypothetical participant from the female group. Her credit score falls within the 550-600 range. Even though she\'s from the female group, her score is represented in golden/yellow on both flowcharts to emphasize the consistent representation of participant scores. In both flowcharts, directly beneath the golden/yellow box, you\'ll find applicants with credit scores that is one level below Alice\'s, while the box above indicates applicants with credit scores that is one level above Alice's credit score. This exercise focuses on the male group flowchart to the left. We\'re are examining male applicants whose credit scores fall in the 600-650 range, one level above Alice's credit score. To find how many of these male applicants are denied, please look at the fraction on the light orange arrow.";
+            break;
+        default:
+            hint = "Error: Hint not found.";
+    }
+
+    document.getElementById(sectionId).innerHTML = hint;
+}
+     </script>
+
+  </template>

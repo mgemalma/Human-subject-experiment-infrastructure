@@ -1,0 +1,111 @@
+<template name = "instr_3">
+<style>
+  body
+  {
+    background-color: white;
+  }
+
+  #Instructions_Division
+  {
+    border: 2px solid black;
+    background-color: white;
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    /* height: 95%; */
+    width: 70%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 25px;
+    text-align: left;
+    font-size: 18px;
+    /* overflow: scroll; */
+    line-height: 1.08;
+
+  }
+
+  #center_sec
+  {
+    /* border: 2px solid black; */
+    background-color: white;
+    position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .Button {
+    background-color: red;
+    border-color: red;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .button {
+  border: outset;
+  color: white;
+  padding: 1.2% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
+
+<div id="Instructions_Division">
+  <p style="font-size: 30px;"><b>Game rules</b></p>
+  <p>Great! Now let’s tell you a bit more about the rules of this game.</p>
+  <p>In this game, you will start with a total of <b>600 coins</b> in your “account,” and you will have the opportunity to apply for loans from the local bank for at most 10 rounds. You will be required to apply for a loan for <b>at least one round</b>. Then,</p>
+  <p>starting from the second round,  you can decide whether you want to continue applying loans from the local bank. In each round of the game:</p>
+  <ul>
+  <li><b><i>If you decide to apply for a loan</i></b>, then it will cost you <b>50 coins</b>. The bank will use its AI powered system to review your application profile and make a loan decision. <p></p><ul><li>Before you submit your loan application, <i><b> you will be given an opportunity to improve your credit score!</b></i><p></p><ul><li><b><i>If you choose to improve</i></b>, it will cost you <b>{{cost}} coins</b>, and the improvement may or may not be successful. If the improvement was <b style="color: #006600;">successful</b>, you will <b style="color: #006600;">move to the next 50-point credit score range</b> (e.g., increase from 600-650 to 650-700). If the improvement was <b style="color: #b30000;">unsuccessful</b>, you will <b style="color: #b30000;">remain at your current credit score range</b>.</li><p></p><li><i><b>If you choose not to improve your credit score</b></i>, you will <b>not</b> need to pay the additional {{cost}} coins but you will have to <b>remain</b> at your current credit score range.</li></ul></li><br><li>Once you submit your loan application after possibly improving on your credit score, the AI system will check your credit score (which will fall into your most updated credit score range) to make its loan decision. If the system approves your loan application, you will receive a reward of <b>100 coins</b>; otherwise, you will not receive any rewards.</li></ul></li>
+  <br>
+  <li><b><i>If you decide to not apply for loans anymore</i></b>, you will directly go to the end of the game, where you will complete a brief survey and claim your bonus.</li>
+</ul>
+  <p><mark>At the end of the game, we will convert the amount left in your account to your bonus payment using a rate of <b>{{getConversionCoin}} coins to ${{getConversionRate}}.</b></mark></p>
+  <p><mark><b>There will be attention check questions throughout the game. Inattentive answers to those questions may lead to your loss of the bonus payment.</b></mark></p>
+  <p>On the next page, we'll provide a short tutorial to guide you through the game's interface. <span style="background-color: #FFDAB9; color: #003366;"><b>After the tutorial, there will be a brief quiz to ensure you've understood the concepts.</b></span> Don't worry if you don't get it right the first time—<span style="background-color: #FFDAB9; color: #003366;"><b>the quiz allows for unlimited attempts, and assistance will be available if needed.</b></span> Click the button below to begin the tutorial!</p>
+  <div id="center_sec">
+    <input id="next_page" style="border-color: #4169E1; background-color: #4169E1; padding: 10px 20px; font-size: 18px;" class = "button" type = "submit" value = "Next">
+  </div>
+  </div>
+
+  <script>
+    var button_next = document.getElementById("next_page");
+    button_next.onclick = function()
+    {
+      var user = UserAdv.findOne({"_id" : Meteor.userId()});
+      if (user == null)
+      {
+        error_handle();
+      }
+      document.getElementById("next_page").disabled = true;
+      if (butonRef('next_page'))
+      {
+        return;
+      }
+      CurrentIndex = 4;//++user.currentIndex;
+      if (comparatorForIndices(CurrentIndex, true) == true)
+      {
+      UserAdv.update(Meteor.userId(), { $set: { currentIndex : CurrentIndex  }}, function( error, result) {
+        if ( error ) {error_handle();} //info about what went wrong
+        if ( result ) {location.reload();} //the _id of new object if successful
+      });
+    }
+      // location.reload();
+    }
+    </script>
+
+</template>

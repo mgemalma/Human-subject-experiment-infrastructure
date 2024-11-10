@@ -1,0 +1,234 @@
+<template name = "profile_inst">
+  {{#if currentUser}}
+
+
+<style>
+
+
+  body
+  {
+    background-color: white;
+  }
+
+.rounded-circle
+{
+  width: 15%;
+}
+
+
+
+
+#Instructions_Division
+{
+  border: 2px solid black;
+  background-color: white;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  padding: 20px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.08;
+}
+
+.regular_text
+{
+  font-size: 18px;
+  text-align: left;
+}
+
+.text_section
+{
+  text-align: left;
+  padding: 20px;
+}
+
+.Button_Next {
+  border: outset;
+  color: white;
+  padding: 1.1% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+.Button_Round {
+  background-color: FireBrick;
+  border-radius: 12px;
+  color: white;
+  padding: 10px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* @media only screen and (max-width: 1300px) {
+    #list {
+        display: none;
+    }
+} */
+
+.size-changer
+{
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+}
+
+#avatar_section
+{
+  /* position: relative;
+  left: 50%;
+  -ms-transform: translate(0%, 0%);
+  transform: translate(-20%, 55%); */
+}
+
+#next_page
+{
+  /* position: relative;
+  left: 75%;
+  -ms-transform: translate(0%, 0%);
+  transform: translate(0%, 0%);
+  width: 20%;
+  padding: 1% 1%;
+  margin: 4px 2px; */
+  /* z-index: 0; */
+
+}
+
+#center_sec
+{
+  /* border: 2px solid black; */
+  background-color: white;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#center_sec
+{
+  /* border: 2px solid black; */
+  background-color: white;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#avatars
+{
+  /*border: 2px solid black;*/
+  width: 100%;
+  background-color: white;
+  position: relative;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: white;
+  padding: 0px;
+  text-align: center;
+  font-size: 18px;
+}
+
+
+
+</style>
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+<div id="Instructions_Division" >
+  <div class="text_section">
+    <p style="font-size: 30px;"><b>Create your profile!</b></p>
+    <p class="regular_text">Thank you for choosing to take our HIT!</p>
+    <p class="regular_text">As we told you earlier, in this HIT, you will play a game to travel into the future and experience a world where AI makes decisions on behalf of people. To start, let’s first create a player profile for you in this game!</p>
+    <p class="regular_text">In the following, please first give yourself a nickname. <br><br></p>
+
+    <div id="center_sec">
+
+        <t style="font-size: 18px;"><b>Nickname:</b></t>
+        <input maxlength = "20" type="text" id="nickname" style="width: 25%; height: 30px; font-size: 18px;">
+        <input id="submit_nickname" style="background-color: #00BFFF; font-size: 14px;" class = "Button_Round" type = "submit" value = "Submit">
+        <br>
+        <br>
+        <!-- <input id="name_submit" class="Button" type="submit" value="Submit"> -->
+        <div id="gender_block" style="float:left;display:none;">
+          <t style="font-size: 18px;"><b>What is your gender?</b></t>
+          <p style="font-size: 14px; margin-top: 10px;">
+              For the purpose of this study, we are only able to accept participants who identify within the gender options of Male or Female. We understand that gender is diverse and inclusive, and we sincerely apologize for any exclusion of non-binary individuals. This limitation is necessary for the specific focus of our research, and we appreciate your understanding.
+          </p>
+          <input type="radio" name="gender" value="Male"> Male
+          <input type="radio" name="gender" value="Female"> Female
+          <input id="gender_btn" style="background-color: #00BFFF; font-size: 14px;padding: 5px 10px;" class="Button_Round" type="submit" value="Submit">
+      </div>      
+        <br>
+        <br>
+
+      <!-- <button class="btn btn-default dropdown-toggle" style=" width: 37%; font-size: 18px;  padding: 10px; border-color: black; color: black;" type="button" id="menu1" data-toggle="dropdown">Select Avatar:
+      <span class="caret"></span></button> -->
+      <!-- <ul class="dropdown-menu" id="list" role="menu" aria-labelledby="menu1"> -->
+        <div id="avatars_section" style="display:none;">
+          <p class="regular_text">Great! Now please pick an avatar for yourself. You can simply select an avatar by clicking on it. If you don't like any of the avatars shown below, please click the "Refresh" button to get a new batch of avatars!</p>
+          <div id="avatars">
+          <img id="Avatar1" src="https://bootdey.com/img/Content/avatar/avatar1.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="80"> <img id="Avatar2" src="https://bootdey.com/img/Content/avatar/avatar2.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="80"> <img id="Avatar3" src="https://bootdey.com/img/Content/avatar/avatar3.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="80"> <img id="Avatar4" src="https://bootdey.com/img/Content/avatar/avatar4.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="80"> <img id="Avatar5" src="https://bootdey.com/img/Content/avatar/avatar5.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="80"> <img id="Avatar6" src="https://bootdey.com/img/Content/avatar/avatar6.png" style="border-radius: 50%;" alt="Admin" class="rounded-circle" width="80"><br><br>
+          </div>
+
+          <input id="avatars_btn" style="background-color: #00BFFF; font-size: 14px;" class = "Button_Round" type = "submit" value = "Refresh">
+        </div>
+        <br>
+        <div id="btn_section" style="display:none;">
+          <p class="regular_text">If you are happy with your avatar, click the button below to proceed!</p>
+          <input id="next_page" style="background-color: #4169E1; font-size: 18px;" class = "Button_Next" type = "submit" value = "Next">
+        </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+  var button_next = document.getElementById("avatars_btn");
+  button_next.onclick = function()
+  {
+    var length_avatars = document.getElementsByClassName("rounded-circle").length;
+    var RandomMembers = getRandomPics(pictures, length_avatars);
+    for (i = 0; i < length_avatars; i++)
+    {
+
+        var avatar_element= document.getElementById('Avatar' + (i + 1));
+        avatar_element.src = RandomMembers[i];
+        avatar_element.style.border = "none";
+
+    }
+
+  }
+  </script>
+
+{{else}}
+{{isUser}}
+
+ {{/if}}
+
+
+</template>
