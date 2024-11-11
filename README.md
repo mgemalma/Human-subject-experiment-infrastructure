@@ -1,6 +1,6 @@
 # Human Subject Experiment Infrastructure for AI Fairness Studies
 
-This repository provides infrastructure for conducting human subject experiments to explore participants' engagement, strategic responses, and fairness perceptions in interactions with AI-based decision systems. Over the years, three extensive versions of this web app have been developed to support various research directions, with the latest and most robust version now publicly available. These experiments support research on how fairness perceptions evolve in the presence of qualification improvement opportunities and over repeated interactions with AI systems, as studied in the following research:
+This repository provides infrastructure for conducting human subject experiments to explore participants' engagement, strategic responses, and fairness perceptions in interactions with AI-based decision systems. Over the years, three extensive versions of this web app have been developed to support various research directions, with the latest and most robust version now publicly available. Other versions are available upon request. These experiments support research on how fairness perceptions evolve in the presence of qualification improvement opportunities and over repeated interactions with AI systems, as studied in the following research:
 
 - **Understanding Decision Subjects' Engagement with and Perceived Fairness of AI Models When Opportunities of Qualification Improvement Exist**  
   *Authors*: Meric Altug Gemalmaz and Ming Yin  
