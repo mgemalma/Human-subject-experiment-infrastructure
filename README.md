@@ -12,6 +12,12 @@ This repository provides infrastructure for conducting human subject experiments
 ### Overview
 This project offers a structured environment for controlled experiments with human participants, focusing on interactions and fairness perceptions within AI-based decision systems. It provides setup instructions, usage guides, and materials necessary to replicate the experimental setup for further research and validation.
 
+## Note on Security Features
+
+Given the complexity of the web app, not all details can be explained here. This web app was actively implemented to combat bot attacks and spammers. For these reasons, certain "tricks" have been incorporated, such as a honeypot CAPTCHA.
+
+Please feel free to reach out to the author, Meric Altug Gemalmaz, with any questions at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
+
 ### Installation
 
 1. **Clone the repository**:
