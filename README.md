@@ -14,7 +14,7 @@ This project offers a structured environment for controlled experiments with hum
 
 ## Note on Security Features
 
-Given the complexity of the web app, not all details can be explained here. This web app was actively implemented to combat bot attacks and spammers. For these reasons, certain "tricks" have been incorporated, such as a honeypot CAPTCHA.
+Given the complexity of the web app, not all details can be fully explained here. This app was specifically designed to combat bot attacks and spammers, given the increasing number of attackers on crowdsourcing platforms. To enhance security, various "tricks" have been incorporated, including a honeypot CAPTCHA, intentionally "meaningless" field names in the client code to obscure structure from attackers who analyze the client code to create bots targeting human-subject experiments, and hard-coded safeguards to prevent events from being triggered multiple times by malicious actors. These measures are necessary to maintain data integrity and ensure the database does not incorrectly record user data.
 
 Please feel free to reach out to the author, Meric Altug Gemalmaz, with any questions at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
 
