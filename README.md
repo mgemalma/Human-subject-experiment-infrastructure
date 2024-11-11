@@ -51,7 +51,7 @@ http://localhost:3000/?workerId=<worker_id>&assignmentId=<assignment_id>&hitId=<
 ```
 ## Deployment
 
-To deploy the Meteor app locally, use the following example commands to set up the environment variables and start the application:
+To deploy the Meteor app locally, use the following example commands to set up the environment variables and start the application. **Note:** Adjust these commands according to your specific setup; the following is just an example.
 
 ```bash
 # Set the port number for the application
