@@ -12,10 +12,6 @@ This repository provides infrastructure for conducting human subject experiments
 ### Overview
 This project offers a structured environment for controlled experiments with human participants, focusing on interactions and fairness perceptions within AI-based decision systems. It provides setup instructions, usage guides, and materials necessary to replicate the experimental setup for further research and validation.
 
-## Note on Security Features
-
-Given the complexity of the web app, not all details can be fully explained here. This app was specifically designed to combat bot attacks and spammers, given the increasing number of attackers on crowdsourcing platforms. To enhance security, various "tricks" have been incorporated, including a honeypot CAPTCHA, intentionally "meaningless" field names in the client code to obscure structure from attackers who analyze the client code to create bots targeting human-subject experiments, and hard-coded safeguards to prevent events from being triggered multiple times by malicious actors. These measures are necessary to maintain data integrity and ensure the database does not incorrectly record user data.
-
 Please feel free to reach out to the author, Meric Altug Gemalmaz, with any questions at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
 
 ### Installation
@@ -132,6 +128,14 @@ echo "Deployment finished"
 
 This project includes a range of dependencies necessary for data handling, visualization, fingerprinting, and interface functionality:
 - `@babel/runtime`, `@fingerprintjs/botd`, `@fingerprintjs/fingerprintjs`, `@fingerprintjs/fingerprintjs-pro`, `aws-sdk`, `bcrypt`, `canvas`, `d3`, `d3-sankey`, `driver.js`, `express`, `filereader`, `fingerprintjs2`, `http-proxy`, `intro.js`, `jStat`, `js-base64`, `meteor-node-stubs`, `sweetalert2`
+
+## Note on Security Features
+
+Given the complexity of the web app, not all details can be fully explained here. This app was specifically designed to combat bot attacks and spammers due to the increasing number of attackers on crowdsourcing platforms. To enhance security, various "tricks" have been incorporated, including a honeypot CAPTCHA, intentionally "meaningless" field names in the client code to obscure structure from attackers analyzing the code to create bots targeting human-subject experiments, and hard-coded safeguards to prevent events from being triggered multiple times by malicious actors. 
+
+Although the primary goal of these human-subject experiments is not to combat bot attacks, maintaining data integrity is essential for the correct conclusion of research studies. Therefore, a multi-layered security approach has been implemented, including IP filtering, a honeypot CAPTCHA, Google CAPTCHA, a custom CAPTCHA, and specific field flags that bots are likely to miss and thus fail to set correctly. Upon completion of a user session, the server conducts a comprehensive check to verify the user's authenticity and ensure they are not a bot submitting responses.
+
+Please feel free to reach out to the author, Meric Altug Gemalmaz, with any questions at: [mgemalma@purdue.edu](mailto:mgemalma@purdue.edu).
 
 ### Configuration
 
