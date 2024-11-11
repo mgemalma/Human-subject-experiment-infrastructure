@@ -4,13 +4,11 @@ This repository provides infrastructure for conducting human subject experiments
 
 - **Understanding Decision Subjects' Engagement with and Perceived Fairness of AI Models When Opportunities of Qualification Improvement Exist**  
   *Authors*: Meric Altug Gemalmaz and Ming Yin  
-  *Abstract*: This study investigates how the fairness of an AI model’s decisions impacts people’s engagement with the model and their fairness perceptions when they can strategically respond. We consider two forms of strategic response: choosing whether to continue interacting with the model and deciding whether to invest in self-improvement to enhance future favorable outcomes. Across three human-subject experiments, findings reveal that decision subjects' willingness to engage or improve does not vary with the model's fairness, even when it displays bias against certain protected attributes. However, subjects perceive the model as less fair when it systematically discriminates against their group, particularly when qualification improvements are more challenging for less qualified individuals.
 
 - **Understanding Decision Subjects' Fairness Perceptions and Retention in Repeated Interactions with AI-Based Decision Systems**  
   *Authors*: Meric Altug Gemalmaz and Ming Yin  
-  *Conference*: 5th AAAI/ACM Conference on AI, Ethics, and Society (AIES), Oxford, UK, August 2022  
-  *Abstract*: In this paper, we examine fairness perceptions and retention in repeated interactions with an AI-based decision system. By studying an AI-driven loan lending system, we analyze how fairness perceptions and retention are influenced when decision subjects can repeatedly engage and respond to the system. The findings suggest that subjects' perceptions and engagement are more influenced by whether the system favors their group than by unbiased treatment across groups. Additionally, subjects with varying qualification levels respond differently to both biased group treatment and system tendencies to favor or disfavor their own group. While retention is primarily driven by subjects' personal prospects for favorable outcomes, their fairness perceptions are shaped by how the system treats individuals in other groups in a nuanced way.
-
+  *Conference*: 5th AAAI/ACM Conference on AI, Ethics, and Society (AIES), Oxford, UK, August 2022
+  
 ### Overview
 This project offers a structured environment for controlled experiments with human participants, focusing on interactions and fairness perceptions within AI-based decision systems. It provides setup instructions, usage guides, and materials necessary to replicate the experimental setup for further research and validation.
 
