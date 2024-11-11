@@ -1,11 +1,11 @@
 # Human Subject Experiment Infrastructure for AI Fairness Studies
 
-This repository provides infrastructure for conducting human subject experiments to explore participants' engagement, strategic responses, and fairness perceptions in interactions with AI-based decision systems. Over the years, three different versions of this web app have been developed to support various research directions, with the latest and most robust version now publicly available. Other versions are available upon request. These experiments support research on how fairness perceptions change in the presence of qualification improvement opportunities and over repeated interactions with AI systems, as studied in the following research:
+This repository provides infrastructure for conducting human subject experiments that examine participants’ engagement, strategic responses, and fairness perceptions in interactions with AI-based decision systems. Over the years, three versions of this web app have been developed to support two research papers. Only the latest, most robust version is publicly available, as it builds a stronger foundation while retaining most of the core functionality of earlier versions. Other versions—developed for Paper 1 experiments and Paper 2 experiments 1, 2, and 3—are available upon request. This repository specifically contains the experimental code for Paper 2, Experiment 4. Collectively, these experiments support research on how fairness perceptions change with qualification improvement opportunities and the role of AI fairness in repeated interactions with AI systems, as detailed in the following studies:
 
-- **Understanding Decision Subjects' Engagement with and Perceived Fairness of AI Models When Opportunities of Qualification Improvement Exist**  
+- **Paper 2: Understanding Decision Subjects' Engagement with and Perceived Fairness of AI Models When Opportunities of Qualification Improvement Exist**  
   *Authors*: Meric Altug Gemalmaz and Ming Yin  
 
-- **Understanding Decision Subjects' Fairness Perceptions and Retention in Repeated Interactions with AI-Based Decision Systems**  
+- **Paper 1: Understanding Decision Subjects' Fairness Perceptions and Retention in Repeated Interactions with AI-Based Decision Systems**  
   *Authors*: Meric Altug Gemalmaz and Ming Yin  
   *Conference*: 5th AAAI/ACM Conference on AI, Ethics, and Society (AIES), Oxford, UK, August 2022
   
@@ -131,7 +131,7 @@ This project includes a range of dependencies necessary for data handling, visua
 
 ## Note on Security Features
 
-Given the complexity of the web app, not all details can be fully explained here. This app was specifically designed to combat bot attacks and spammers due to the increasing number of attackers on crowdsourcing platforms (i.e., platforms researchers use to recruit human subjects). To enhance security, various "tricks" have been incorporated, including a honeypot CAPTCHA, intentionally "meaningless" field names in the client code to obscure structure from attackers analyzing the code to create bots targeting human-subject experiments, and hard-coded safeguards to prevent events from being triggered multiple times by malicious actors. 
+Given the complexity of the web app, not all details can be fully explained here. This app was specifically designed to combat bot attacks and spammers due to the increasing number of attackers on crowdsourcing platforms (i.e., platforms researchers use to recruit human subjects). To enhance security, various "tricks" have been incorporated, including a honeypot CAPTCHA, and hard-coded safeguards to prevent events from being triggered multiple times by malicious actors. 
 
 Although the primary goal of these human-subject experiments is not to combat bot attacks, maintaining data integrity is essential for accurate research outcomes. Consequently, a multi-layered security approach has been implemented, including IP filtering, FingerprintJS, a honeypot CAPTCHA, Google CAPTCHA, a custom CAPTCHA, and specific field flags that bots are likely to miss and therefore fail to set correctly. At the end of each user session, the server performs a comprehensive check to verify the user's authenticity and ensure they are not a bot submitting responses.
 
